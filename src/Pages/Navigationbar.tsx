@@ -8,7 +8,12 @@ export const Navigationbar = () => {
     <Navbar >
       <Container>
         <Link to="/">Home</Link>
-        <Link to="/about">About Me</Link>
+        <Link to="/accounts">Accounts</Link>
+        <Link to="/cards">Cards</Link>
+        <Link to="/categories">Categories</Link>
+        <Link to="/shortcuts">ShortCuts</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/logout">Logout</Link>
       </Container>
     </Navbar><br />
   </>
