@@ -3,10 +3,10 @@ import authHeader from './auth-header';
 
 const API_URL = "http://127.0.0.1:3000/";
 
-class UserService {
-  getPublicContent() {
-    return axios.get(API_URL + 'all');
-  }
+class CategoryService {
+  // getPublicContent() {
+  //   return axios.get(API_URL + 'all');
+  // }
 
   // getAccounts() {
   //   return axios.get(API_URL + 'accounts', { headers: authHeader() });
@@ -28,13 +28,13 @@ class UserService {
     return axios.delete(API_URL + `api/v1/categories/${id}`, { headers: authHeader() });
   }
 
-  getCards() {
-    return axios.get(API_URL + 'cards', { headers: authHeader() });
-  }
+  // getCards() {
+  //   return axios.get(API_URL + 'cards', { headers: authHeader() });
+  // }
 
-  getSummary() {
-    return axios.get(API_URL + 'summary', { headers: authHeader() });
-  }
+  // getSummary() {
+  //   return axios.get(API_URL + 'summary', { headers: authHeader() });
+  // }
 }
 
-export default new UserService();
+export default new CategoryService();

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import UserService from "../services/user.service";
+import CategoryService from "../services/category.service";
 
 const Category = () => {
   const params = useParams();
@@ -8,7 +8,7 @@ const Category = () => {
   const [category, setCategory] = useState('');
 
   useEffect(() => {
-    UserService.getCategory(params.id).then((response) => {
+    CategoryService.getCategory(params.id).then((response) => {
       if (response.status === 200) {
         setCategory(response.data)
         return response.data;
@@ -20,8 +20,7 @@ const Category = () => {
   }, [params.id]);
 
   const deleteRecipe = () => {
-    UserService.deleteCategory(params.id).then((response) => {
-      console.log(response)
+    CategoryService.deleteCategory(params.id).then((response) => {
       if (response.status === 200) {
         navigate("/categories")
       }
@@ -41,7 +40,7 @@ const Category = () => {
           className="img-fluid position-absolute"
         />
         <div className="overlay bg-dark position-absolute" />
-        <h1 className="display-4 position-relative text-white">
+        <h1 className="display-4 position-relative text-black">
           {category.name}
         </h1>
       </div>

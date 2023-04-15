@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import UserService from "../services/user.service";
+import CategoryService from "../services/category.service";
+import Card from "./CardWrapper";
 
 const CategoryList = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    UserService.getCategoryList().then((res) => {
-        if (res.status === 200) {
+    CategoryService.getCategoryList().then((res) => {
+      if (res.status === 200) {
 
-          setCategories(res.data)
-          return res.data;
-        }
-      },
+        setCategories(res.data)
+        return res.data;
+      }
+    },
       error => {
         console.log("Network response was not ok.")
         navigate("/");
-  });
-}, []);
+      });
+  }, []);
 
   const allCategories = categories.map((category, index) => (
     <div key={index} className="col-md-6 col-lg-4">
@@ -30,6 +31,8 @@ const CategoryList = () => {
           </Link>
         </div>
       </div>
+      <Card data={category} />
+
     </div>
   ));
   const noCategory = (

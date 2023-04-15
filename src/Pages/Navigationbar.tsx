@@ -12,6 +12,7 @@ export const Navigationbar = () => {
         <Link to="/cards">Cards</Link>
         <Link to="/categories">Categories</Link>
         <Link to="/shortcuts">ShortCuts</Link>
+        <Link to="/signup">Signup</Link>
         <Link to="/login">Login</Link>
         <Link to="/logout">Logout</Link>
       </Container>
