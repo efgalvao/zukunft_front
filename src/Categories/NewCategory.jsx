@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import userService from "../services/user.service";
+import CategoryService from "../services/category.service";
 
 const NewCategory = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const NewCategory = () => {
 
     const body = { 'category': { 'name': name } };
 
-    userService.createCategory(body).then((response) => {
+    CategoryService.createCategory(body).then((response) => {
       if (response.status === 201) {
         console.log(response.data)
         navigate(`/category/${response.data.id}`)

@@ -1,35 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import UserService from "../services/user.service";
+import CategoryService from "../services/category.service";
+import Card from "./CardWrapper";
+import CustomButton from "../Common/CustomButton";
 
 const CategoryList = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    UserService.getCategoryList().then((res) => {
-        if (res.status === 200) {
+    CategoryService.getCategoryList().then((res) => {
+      if (res.status === 200) {
 
-          setCategories(res.data)
-          return res.data;
-        }
-      },
+        setCategories(res.data)
+        return res.data;
+      }
+    },
       error => {
         console.log("Network response was not ok.")
         navigate("/");
-  });
-}, []);
+      });
+  }, []);
 
   const allCategories = categories.map((category, index) => (
     <div key={index} className="col-md-6 col-lg-4">
-      <div className="card mb-4">
-        <div className="card-body">
-          <h5 className="card-title">{category.name}</h5>
-          <Link to={`/category/${category.id}`} className="btn custom-button">
-            View Category
-          </Link>
-        </div>
-      </div>
+      <Card data={category} />
     </div>
   ));
   const noCategory = (
@@ -53,17 +48,11 @@ const CategoryList = () => {
       </section>
       <div className="py-5">
         <main className="container">
-          <div className="text-end mb-3">
-            <Link to="/category" className="btn custom-button">
-              Create New Category
-            </Link>
-          </div>
           <div className="row">
             {categories.length > 0 ? allCategories : noCategory}
           </div>
-          <Link to="/" className="btn btn-link">
-            Home
-          </Link>
+          <CustomButton linkTo="/" buttonText="Home" color="green" />
+          <CustomButton linkTo="/category" buttonText="Create New Category" color="blue" />
         </main>
       </div>
     </>

@@ -4,8 +4,8 @@ import { Container } from 'react-bootstrap';
 function App() {
   return (
     <>
-      <Container>
-        <Navigationbar />
+      <Navigationbar />
+      <Container style={{ marginTop: '30px' }}>
         {Routes}
       </Container>
     </>

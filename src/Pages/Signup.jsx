@@ -1,11 +1,15 @@
+import axios, { AxiosResponse } from "axios";
 import { useState } from "react";
+// import { LoginFormData } from '../types/data'
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../services/auth.service';
 
 import './pages.css'
 
-export function Login() {
+const Signup = () => {
   const [formData, setFormData] = useState({
+    name: "",
+    username: "",
     email: "",
     password: "",
   });
@@ -14,11 +18,26 @@ export function Login() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    AuthService.login(formData.email, formData.password).then(
-      (result) => {
-        console.log(result);
+    const payload =  {
+      "user": {
+          "name": formData.name,
+          "username": formData.username,
+          "email": formData.email,
+          "password": formData.password
+      }
+  }
+    AuthService.register(payload).then(
+      (response) => {
+        console.log(response);
+
+        if (response.status === 201) {
+        // console.log(result);
+        // handle successful login
         navigate('/categories');
-      },
+
+        // window.location.reload();
+      }
+    },
       error => {
         // const resMessage =
         //   (error.response &&
@@ -40,8 +59,29 @@ export function Login() {
 
   return (
     <div>
-      <h2 className='teste'> Please Login</h2>
+      <h2 className='teste'> Signup Form</h2>
       <form onSubmit={handleSubmit}>
+      <label>
+          Name:
+          <input
+            type="text"
+            className="inputField"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+          />
+        </label>
+        <label>
+          Username:
+          <input
+            type="text"
+            className="inputField"
+            name="username"
+            value={formData.username}
+            onChange={handleInputChange}
+          />
+        </label>
+        <br />
         <label>
           Email:
           <input
@@ -52,7 +92,6 @@ export function Login() {
             onChange={handleInputChange}
           />
         </label>
-        <br />
         <label>
           Password:
           <input
@@ -68,3 +107,5 @@ export function Login() {
     </div>
   );
 }
+
+export default Signup;
