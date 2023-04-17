@@ -15,6 +15,7 @@ const CardWrapper = styled.div`
   padding: 20px;
   width: 300px;
   height: 200px;
+  margin-bottom: 10px;
 `;
 
 const Title = styled.h2`
@@ -41,6 +42,15 @@ const Value = styled.span`
   font-size: 16px;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #333;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 function Card({ data }) {
   const { id, name, kind, balance_cents, updated_at } = data;
   const formattedDate = new Date(updated_at).toLocaleString();
@@ -49,25 +59,26 @@ function Card({ data }) {
   return (
     <CardWrapper>
       <Title>{name}</Title>
-      {/* <FieldWrapper>
-        <Label>ID:</Label>
-        <Value>{id}</Value>
-      </FieldWrapper> */}
       <FieldWrapper>
         <Label>Kind:</Label>
         <Value>{kind}</Value>
       </FieldWrapper>
       <FieldWrapper>
         <Label>Balance:</Label>
-        <Value>{`$${(balance_cents / 100).toFixed(2)}`}</Value>
+        <Value>{`$${(balance_cents / 100).toFixed(2)} `}</Value>
       </FieldWrapper>
       <FieldWrapper>
         <Label>Last update:</Label>
         <Value>{formattedDate}</Value>
       </FieldWrapper>
-      <Link to={`/account/${id}`} className="btn custom-button">
-        Details
-      </Link>
+      <DetailWrapper>
+        <Link to={`/ account / ${id} `} className="btn custom-button">
+          Details
+        </Link>
+      </DetailWrapper>
+      <StyledLink to={`/ account / ${id} `}>
+        {children}
+      </StyledLink>
     </CardWrapper>
   );
 }

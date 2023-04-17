@@ -12,9 +12,9 @@ const CardWrapper = styled.div`
   border: 1px solid #e6e6e6;
   border-radius: 5px;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  width: 300px;
-  height: 200px;
+  padding: 10px;
+  width: 250px;
+  height: 90px;
 `;
 
 const Title = styled.h2`
@@ -23,40 +23,16 @@ const Title = styled.h2`
   margin-bottom: 10px;
 `;
 
-const FieldWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  width: 100%;
-`;
-
-const Label = styled.span`
-  font-size: 16px;
-  font-weight: bold;
-`;
-
-const Value = styled.span`
-  font-size: 16px;
-`;
-
 function Card({ data }) {
   const { id, name } = data;
-
 
   return (
     <CardWrapper>
       <Title>{name}</Title>
-      {/* <FieldWrapper>
-        <Label>ID:</Label>
-        <Value>{id}</Value>
-      </FieldWrapper> */}
       <Link to={`/category/${id}`} className="btn custom-button">
         Details
       </Link>
     </CardWrapper>
-
   );
 }
 

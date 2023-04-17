@@ -12,9 +12,9 @@ const CardWrapper = styled.div`
   border: 1px solid #e6e6e6;
   border-radius: 5px;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  width: 300px;
-  height: 200px;
+  padding: 10px;
+  width: 250px;
+  height: 90px;
 `;
 
 const Title = styled.h2`
@@ -49,10 +49,6 @@ function Card({ data }) {
   return (
     <CardWrapper>
       <Title>{name}</Title>
-      {/* <FieldWrapper>
-        <Label>ID:</Label>
-        <Value>{id}</Value>
-      </FieldWrapper> */}
       <FieldWrapper>
         <Label>Kind:</Label>
         <Value>{kind}</Value>
