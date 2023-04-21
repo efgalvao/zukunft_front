@@ -22,7 +22,7 @@ const AccountList = () => {
   }, []);
 
   const allAccounts = accounts.map((account, index) => (
-    <div>
+    <div key={index} className="col-md-6 col-lg-4">
       <Card data={account} />
     </div>
   ));

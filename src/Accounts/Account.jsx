@@ -32,7 +32,6 @@ const Account = () => {
 
   useEffect(() => {
     AccountService.getAccount(params.id).then((response) => {
-      console.log(response)
       if (response.status === 200) {
         setAccount(response.data)
         return response.data;
@@ -86,6 +85,7 @@ const Account = () => {
             </button>
           </div>
         </div>
+        <Link to={`/accounts/${account.id}/transactions`}>Transactions</Link>
         <Link to="/accounts" className="btn btn-link">
           Back to Accounts
         </Link>
