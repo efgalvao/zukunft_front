@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HomePage } from "../Pages/HomePage";
 import Signup from "../Pages/Signup";
 import { Login } from "../Pages/Login";
+import { Logout } from "../Pages/Logout";
 import { AboutPage } from "../Pages/AboutPage";
 import { NotFoundPage } from "../Pages/NotFoundPage";
 
@@ -28,10 +29,11 @@ export default (
     <Route path="/" element={<HomePage />} />
     <Route path="/signup" element={<Signup />} />
     <Route path="/login" element={<Login />} />
+    <Route path="/logout" element={<Logout />} />
+    <Route path="/about" element={<AboutPage />} />
     <Route path="/categories" element={<CategoryList />} />
     <Route path="/category" element={<NewCategory />} />
     <Route path="/category/:id" element={<Category />} />
-    <Route path="/about" element={<AboutPage />} />
     <Route path="*" element={<NotFoundPage />} />
     <Route path="/accounts" element={<AccountList />} />
     <Route path="/account" element={<NewAccount />} />
