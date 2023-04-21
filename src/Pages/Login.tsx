@@ -20,12 +20,6 @@ export function Login() {
         navigate('/categories');
       },
       error => {
-        // const resMessage =
-        //   (error.response &&
-        //     error.response.data &&
-        //     error.response.data.message) ||
-        //   error.message ||
-        //   error.toString();
         console.log(error);
       }
     );

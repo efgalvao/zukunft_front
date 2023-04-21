@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from "axios";
 import { useState } from "react";
-// import { LoginFormData } from '../types/data'
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../services/auth.service';
 
@@ -18,33 +17,24 @@ const Signup = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const payload =  {
+    const payload = {
       "user": {
-          "name": formData.name,
-          "username": formData.username,
-          "email": formData.email,
-          "password": formData.password
+        "name": formData.name,
+        "username": formData.username,
+        "email": formData.email,
+        "password": formData.password
       }
-  }
+    }
     AuthService.register(payload).then(
       (response) => {
         console.log(response);
 
         if (response.status === 201) {
-        // console.log(result);
-        // handle successful login
-        navigate('/categories');
-
-        // window.location.reload();
-      }
-    },
+          navigate('/categories');
+        }
+      },
       error => {
-        // const resMessage =
-        //   (error.response &&
-        //     error.response.data &&
-        //     error.response.data.message) ||
-        //   error.message ||
-        //   error.toString();
+
         console.log(error);
       }
     );
@@ -61,7 +51,7 @@ const Signup = () => {
     <div>
       <h2 className='teste'> Signup Form</h2>
       <form onSubmit={handleSubmit}>
-      <label>
+        <label>
           Name:
           <input
             type="text"

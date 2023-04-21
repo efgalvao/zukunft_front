@@ -15,6 +15,7 @@ export const Navigationbar = () => {
         <Link to="/signup">Signup</Link>
         <Link to="/login">Login</Link>
         <Link to="/logout">Logout</Link>
+        <Link to="/about">About</Link>
       </Container>
     </Navbar><br />
   </>

@@ -4,14 +4,6 @@ import authHeader from './auth-header';
 const API_URL = "http://127.0.0.1:3000/";
 
 class AccountService {
-  // getPublicContent() {
-  //   return axios.get(API_URL + 'all');
-  // }
-
-  // getAccounts() {
-  //   return axios.get(API_URL + 'accounts', { headers: authHeader() });
-  // }
-
   getAccountList() {
     return axios.get(API_URL + 'api/v1/accounts', { headers: authHeader() });
   }
