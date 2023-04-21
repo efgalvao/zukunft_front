@@ -19,6 +19,10 @@ import CardList from "../Cards/CardList";
 import Card from "../Cards/Card";
 import NewCard from "../Cards/NewCard";
 
+import TransactionList from "../Transactions/TransactionList";
+import NewTransaction from "../Transactions/NewTransaction";
+import UpdateTransaction from "../Transactions/UpdateTransaction";
+
 export default (
   <Routes>
     <Route path="/" element={<HomePage />} />
@@ -35,5 +39,9 @@ export default (
     <Route path="/cards" element={<CardList />} />
     <Route path="/cards/:id" element={<Card />} />
     <Route path="/card" element={<NewCard />} />
+    <Route path="/accounts/:accountId/transactions" element={<TransactionList />} />
+    <Route path="/accounts/:accountId/transaction" element={<NewTransaction />} />
+    <Route path="/update-transaction/:id" element={<UpdateTransaction />} />
+
   </Routes>
 );
