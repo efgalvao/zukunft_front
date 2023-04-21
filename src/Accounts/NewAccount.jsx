@@ -23,7 +23,6 @@ const NewAccount = () => {
 
     AccountService.createAccount(body).then((response) => {
       if (response.status === 201) {
-        console.log(response.data)
         navigate(`/accounts/${response.data.id}`)
       }
     },

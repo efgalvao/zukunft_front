@@ -71,14 +71,7 @@ function Card({ data }) {
         <Label>Last update:</Label>
         <Value>{formattedDate}</Value>
       </FieldWrapper>
-      <DetailWrapper>
-        <Link to={`/ account / ${id} `} className="btn custom-button">
-          Details
-        </Link>
-      </DetailWrapper>
-      <StyledLink to={`/ account / ${id} `}>
-        {children}
-      </StyledLink>
+      <StyledLink to={`/account/${id}`}>View details</StyledLink>
     </CardWrapper>
   );
 }
