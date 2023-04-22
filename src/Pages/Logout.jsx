@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../services/auth.service';
 import styled from 'styled-components';
@@ -18,7 +17,8 @@ export function Logout() {
 
   const handleLogout = () => {
     AuthService.logout();
-    navigate("/");
+    navigate('/');
+    window.location.reload();
   };
 
   const handleCancel = () => {

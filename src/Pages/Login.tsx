@@ -17,7 +17,9 @@ export function Login() {
     AuthService.login(formData.email, formData.password).then(
       (result) => {
         console.log(result);
-        navigate('/categories');
+        navigate('/accounts');
+        window.location.reload();
+
       },
       error => {
         console.log(error);

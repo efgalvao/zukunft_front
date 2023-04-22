@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Navbar } from 'react-bootstrap';
 
-export const Navigationbar = () => {
-  const loggedIn = localStorage.getItem('user');
+function Navigationbar({ loggedIn }: { loggedIn: boolean }) {
 
   const Logged = () => {
     return (
@@ -39,3 +38,5 @@ export const Navigationbar = () => {
     </>
   );
 };
+
+export default Navigationbar;
