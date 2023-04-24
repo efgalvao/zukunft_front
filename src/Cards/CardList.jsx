@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CardService from "../services/card.service";
 import CardWrapper from "../Accounts/CardWrapper";
+import { LinkButton } from '../Common/Buttons';
 
 const CardList = () => {
   const navigate = useNavigate();
@@ -10,7 +11,6 @@ const CardList = () => {
   useEffect(() => {
     CardService.getCardList().then((res) => {
       if (res.status === 200) {
-
         setCards(res.data)
         return res.data;
       }
@@ -47,16 +47,12 @@ const CardList = () => {
       <div className="py-5">
         <main className="container">
           <div className="text-end mb-3">
-            <Link to="/card" className="btn custom-button">
-              Create New Card
-            </Link>
+            <LinkButton linkTo="/card" buttonText="Create New Card" color="green" />
           </div>
           <div className="row">
             {cards.length > 0 ? allCards : noCard}
           </div>
-          <Link to="/" className="btn btn-link">
-            Home
-          </Link>
+          <LinkButton linkTo="/" buttonText="Home" color="blue" />
         </main>
       </div>
     </>

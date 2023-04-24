@@ -12,11 +12,21 @@ const Button = styled.button`
   margin: 10px 10px 0 0;
 `;
 
-function CustomButton({ linkTo, buttonText, color }) {
+export function LinkButton({ linkTo, buttonText, color }) {
   return (
     <Link to={linkTo}>
-      <Button color={color}>{buttonText}</Button>
+      <Button color={color}>
+        {buttonText}
+      </Button>
     </Link>
+  );
+}
+
+export function CustomButton({ buttonText, color, type = 'button' }) {
+  return (
+    <Button color={color} type={type}>
+      {buttonText}
+    </Button>
   );
 }
 

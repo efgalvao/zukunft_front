@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CategoryService from "../services/category.service";
+import { LinkButton, CustomButton } from '../Common/Buttons';
 
 const NewCategory = () => {
   const navigate = useNavigate();
@@ -14,7 +15,6 @@ const NewCategory = () => {
     event.preventDefault();
     if (name.length === 0)
       return;
-
     const body = { 'category': { 'name': name } };
 
     CategoryService.createCategory(body).then((response) => {
@@ -48,13 +48,8 @@ const NewCategory = () => {
                 onChange={(event) => onChange(event, setName)}
               />
             </div>
-
-            <button type="submit" className="btn custom-button mt-3">
-              Create Category
-            </button>
-            <Link to="/recipes" className="btn btn-link mt-3">
-              Back to categories
-            </Link>
+            <CustomButton type="submit" buttonText="Create Category" color='green' />
+            <LinkButton linkTo="/categories" buttonText="Back to categories" color='blue' />
           </form>
         </div>
       </div>

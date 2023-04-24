@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { LinkButton } from '../Common/Buttons';
 
 const CardWrapper = styled.div`
   display: flex;
@@ -42,15 +42,6 @@ const Value = styled.span`
   font-size: 16px;
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: #333;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
 function Card({ data }) {
   const { id, name, kind, balance_cents, updated_at } = data;
   const formattedDate = new Date(updated_at).toLocaleString();
@@ -71,7 +62,8 @@ function Card({ data }) {
         <Label>Last update:</Label>
         <Value>{formattedDate}</Value>
       </FieldWrapper>
-      <StyledLink to={`/account/${id}`}>View details</StyledLink>
+      <LinkButton linkTo={`/account/${id}`} buttonText='View details' color='blue' />
+
     </CardWrapper>
   );
 }

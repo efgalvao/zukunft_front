@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AccountService from "../services/account.service";
-
+import { CustomButton, LinkButton } from '../Common/Buttons';
 const NewAccount = () => {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
@@ -23,7 +23,7 @@ const NewAccount = () => {
 
     AccountService.createAccount(body).then((response) => {
       if (response.status === 201) {
-        navigate(`/accounts/${response.data.id}`)
+        navigate(`/account/${response.data.id}`)
       }
     },
       error => {
@@ -58,7 +58,6 @@ const NewAccount = () => {
               <input
                 type="number"
                 name="balance"
-                // id="accountBalance"
                 value={formValues.balance}
                 className="form-control"
                 required
@@ -72,7 +71,6 @@ const NewAccount = () => {
                 type="text"
                 name="kind"
                 value={formValues.kind}
-                // id="accountKind"
                 className="form-control"
                 required
                 onChange={onChange}>
@@ -81,13 +79,8 @@ const NewAccount = () => {
                 <option value="card">Card</option>
               </select>
             </div>
-
-            <button type="submit" className="btn custom-button mt-3">
-              Create Account
-            </button>
-            <Link to="/accounts" className="btn btn-link mt-3">
-              Back to accounts
-            </Link>
+            <CustomButton buttonText="Create Account" color="green" type='submit' />
+            <LinkButton linkTo='/accounts' buttonText="Back to Accounts" color="blue" />
           </form>
         </div>
       </div>

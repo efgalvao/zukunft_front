@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../services/auth.service';
+import { CustomButton, LinkButton } from '../Common/Buttons';
 
 import './pages.css'
 
@@ -61,6 +62,7 @@ const Signup = () => {
             onChange={handleInputChange}
           />
         </label>
+        <br />
         <label>
           Username:
           <input
@@ -82,6 +84,7 @@ const Signup = () => {
             onChange={handleInputChange}
           />
         </label>
+        <br />
         <label>
           Password:
           <input
@@ -92,7 +95,9 @@ const Signup = () => {
             onChange={handleInputChange}
           />
         </label>
-        <button type="submit">Submit</button>
+        <br />
+        <CustomButton buttonText='Submit' type='submit' color='green' />
+        <LinkButton linkTo="/" color='blue' buttonText='Cancel' />
       </form>
     </div>
   );

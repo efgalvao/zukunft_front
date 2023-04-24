@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { LinkButton } from '../Common/Buttons';
 
 const CardWrapper = styled.div`
   display: flex;
@@ -61,9 +61,7 @@ function Card({ data }) {
         <Label>Last update:</Label>
         <Value>{formattedDate}</Value>
       </FieldWrapper>
-      <Link to={`/cards/${id}`} className="btn custom-button">
-        Details
-      </Link>
+      <LinkButton linkTo={`/cards/${id}`} buttonText="Details" color='blue' />
     </CardWrapper>
   );
 }

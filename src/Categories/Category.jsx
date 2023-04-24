@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CategoryService from "../services/category.service";
+import { LinkButton } from '../Common/Buttons';
 
 const Category = () => {
   const params = useParams();
@@ -19,7 +20,7 @@ const Category = () => {
     });
   }, [params.id]);
 
-  const deleteRecipe = () => {
+  const deleteCategory = () => {
     CategoryService.deleteCategory(params.id).then((response) => {
       if (response.status === 200) {
         navigate("/categories")
@@ -50,15 +51,13 @@ const Category = () => {
             <button
               type="button"
               className="btn btn-danger"
-              onClick={deleteRecipe}
+              onClick={deleteCategory}
             >
               Delete Category
             </button>
           </div>
         </div>
-        <Link to="/categories" className="btn btn-link">
-          Back to Categories
-        </Link>
+        <LinkButton linkTo="/categories" buttonText="Back to Categories" color='blue' />
       </div>
     </div>
   );

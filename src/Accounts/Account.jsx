@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import AccountService from "../services/account.service";
 import styled from 'styled-components';
+import { LinkButton } from '../Common/Buttons';
 
 const Wrapper = styled.div`
   display: grid;
@@ -56,8 +57,13 @@ const Account = () => {
 
   return (
     <div className="">
-      <div>
+      <div className='title'>
         <Title>{account.name}</Title>
+        <div>
+          <LinkButton linkTo={`/accounts/${account.id}/transactions`} buttonText="Transactions" color="green" />
+          <LinkButton linkTo={`/accounts/${account.id}/transaction`} buttonText="New Transaction" color="blue" />
+        </div>
+
       </div>
       <div className="container py-5">
         <Wrapper>
@@ -79,18 +85,15 @@ const Account = () => {
             <button
               type="button"
               className="btn btn-danger"
-              onClick={deleteAccount}
-            >
+              onClick={deleteAccount}>
               Delete Account
             </button>
           </div>
         </div>
-        <Link to={`/accounts/${account.id}/transactions`}>Transactions</Link>
-        <Link to="/accounts" className="btn btn-link">
-          Back to Accounts
-        </Link>
+        <LinkButton linkTo={'/accounts'} buttonText="Back to Accounts" color="blue" />
+
       </div>
-    </div>
+    </div >
   );
 };
 

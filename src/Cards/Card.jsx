@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CardService from "../services/card.service";
 import styled from 'styled-components';
+import { LinkButton } from '../Common/Buttons';
 
 const Wrapper = styled.div`
   display: grid;
@@ -86,9 +87,7 @@ const Card = () => {
             </button>
           </div>
         </div>
-        <Link to="/cards" className="btn btn-link">
-          Back to Cards
-        </Link>
+        <LinkButton to='cards' color='blue' buttonText='Back to Cards' />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CategoryService from "../services/category.service";
 import Card from "./CardWrapper";
-import CustomButton from "../Common/CustomButton";
+import { LinkButton } from "../Common/Buttons";
 
 const CategoryList = () => {
   const navigate = useNavigate();
@@ -51,8 +51,8 @@ const CategoryList = () => {
           <div className="row">
             {categories.length > 0 ? allCategories : noCategory}
           </div>
-          <CustomButton linkTo="/" buttonText="Home" color="green" />
-          <CustomButton linkTo="/category" buttonText="Create New Category" color="blue" />
+          <LinkButton linkTo="/" buttonText="Home" color="blue" />
+          <LinkButton linkTo="/category" buttonText="Create New Category" color="blue" />
         </main>
       </div>
     </>

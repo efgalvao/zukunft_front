@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AccountService from "../services/account.service";
 import Card from "./CardWrapper";
+import { LinkButton } from '../Common/Buttons';
 
 const AccountList = () => {
   const navigate = useNavigate();
@@ -47,16 +48,13 @@ const AccountList = () => {
       <div className="py-5">
         <main className="container">
           <div className="text-end mb-3">
-            <Link to="/account" className="btn custom-button">
-              Create New Account
-            </Link>
+            <LinkButton linkTo="/account" buttonText="Create New Account" color="green" />
           </div>
           <div className="row">
             {accounts.length > 0 ? allAccounts : noAccount}
           </div>
-          <Link to="/" className="btn btn-link">
-            Home
-          </Link>
+          <LinkButton linkTo="/" buttonText="Home" color="green" />
+
         </main>
       </div>
     </>

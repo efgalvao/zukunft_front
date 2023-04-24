@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CardService from "../services/card.service";
+import { LinkButton, CustomButton } from '../Common/Buttons';
 
 const NewCard = () => {
   const navigate = useNavigate();
@@ -17,8 +18,6 @@ const NewCard = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-
-
     const body = { 'account': { 'name': formValues.name, 'kind': formValues.kind, 'balance_cents': formValues.balance } };
 
     CardService.createCard(body).then((response) => {
@@ -59,7 +58,6 @@ const NewCard = () => {
               <input
                 type="number"
                 name="balance"
-                // id="cardBalance"
                 value={formValues.balance}
                 className="form-control"
                 required
@@ -73,22 +71,14 @@ const NewCard = () => {
                 type="text"
                 name="kind"
                 value={formValues.kind}
-                // id="cardKind"
                 className="form-control"
                 required
                 onChange={onChange}>
-                <option value="savings">Savings</option>
-                <option value="broker">Broker</option>
                 <option value="card">Card</option>
               </select>
             </div>
-
-            <button type="submit" className="btn custom-button mt-3">
-              Create Card
-            </button>
-            <Link to="/cards" className="btn btn-link mt-3">
-              Back to cards
-            </Link>
+            <CustomButton buttonText='Create Card' color='green' type='submit' />
+            <LinkButton to='cards' buttonText='Back to cards' color='blue' />
           </form>
         </div>
       </div>

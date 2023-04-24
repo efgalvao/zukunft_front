@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { LinkButton } from '../Common/Buttons';
 
 const CardWrapper = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ const CardWrapper = styled.div`
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   padding: 10px;
   width: 250px;
-  height: 90px;
+  height: 110px;
 `;
 
 const Title = styled.h2`
@@ -29,9 +29,7 @@ function Card({ data }) {
   return (
     <CardWrapper>
       <Title>{name}</Title>
-      <Link to={`/category/${id}`} className="btn custom-button">
-        Details
-      </Link>
+      <LinkButton linkTo={`/category/${id}`} color='blue' buttonText='Details' />
     </CardWrapper>
   );
 }
