@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TransactionService from "../services/transaction.service";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { CustomButton, LinkButton } from "../Common/Buttons";
 
 const NewTransaction = () => {
+  const params = useParams();
+  const accountId = params.accountId;
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     name: '',
@@ -16,7 +19,7 @@ const NewTransaction = () => {
   const [selectedDate, setSelectedDate] = useState(null);
 
 
-  const onChange = (event, setFunction) => {
+  const onChange = (event) => {
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
   };
@@ -30,12 +33,20 @@ const NewTransaction = () => {
     event.preventDefault();
 
 
-    const body = { 'transaction': { 'title': formValues.title, 'kind': formValues.kind, 'value_cents': formValues.value, 'date': formValues.date, 'category_id': formValues.category } };
+    const body = {
+      'transaction': {
+        'title': formValues.title,
+        'kind': formValues.kind,
+        'value': formValues.value,
+        'date': formValues.date,
+        'category_id': formValues.category,
+        'account_id': accountId
+      }
+    };
 
-    TransactionService.createTransaction(body).then((response) => {
+    TransactionService.createTransaction(accountId, body).then((response) => {
       if (response.status === 201) {
-        console.log(response.data)
-        navigate(`/transactions/${response.data.id}`)
+        navigate(`/accounts/${accountId}/transactions`)
       }
     },
       error => {
@@ -103,9 +114,8 @@ const NewTransaction = () => {
               />
             </div>
 
-            <button type="submit" className="btn custom-button mt-3">
-              Create Transaction
-            </button>
+            <CustomButton type="submit" buttonText="Create Transaction" color="green" />
+            <LinkButton linkTo={`/account/${params.accountId}`} buttonText="Back to Account" color="blue" />
           </form>
         </div>
       </div>
