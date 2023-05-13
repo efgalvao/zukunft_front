@@ -24,6 +24,9 @@ import TransactionList from "../Transactions/TransactionList";
 import NewTransaction from "../Transactions/NewTransaction";
 import UpdateTransaction from "../Transactions/UpdateTransaction";
 
+import TransferenceList from "../Transferences/TransferenceList";
+import NewTransference from "../Transferences/NewTransference";
+
 export default (
   <Routes>
     <Route path="/" element={<HomePage />} />
@@ -44,6 +47,8 @@ export default (
     <Route path="/accounts/:accountId/transactions" element={<TransactionList />} />
     <Route path="/accounts/:accountId/transaction" element={<NewTransaction />} />
     <Route path="/update-transaction/:id" element={<UpdateTransaction />} />
+    <Route path="/transferences" element={<TransferenceList />} />
+    <Route path="/transference" element={<NewTransference />} />
 
   </Routes>
 );

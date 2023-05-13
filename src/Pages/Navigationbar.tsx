@@ -14,6 +14,7 @@ function Navigationbar({ loggedIn }: { loggedIn: boolean }) {
         <Link to="/shortcuts">ShortCuts</Link>
         <Link to="/logout">Logout</Link>
         <Link to="/about">About</Link>
+        <Link to="/transferences">Transferences</Link>
       </Container>
     );
   };
