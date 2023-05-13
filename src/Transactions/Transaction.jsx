@@ -47,7 +47,7 @@ const Transaction = () => {
       <div>
         <Title>{transaction.title}</Title>
       </div>
-      <div className="container py-5">
+      <div className="container py-1">
         <Wrapper>
           <div>
             <Label>Kind:</Label>

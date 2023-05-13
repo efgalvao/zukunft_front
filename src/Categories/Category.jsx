@@ -20,14 +20,14 @@ const Category = () => {
     });
   }, [params.id]);
 
-  const deleteCategory = () => {
+  const handleDelete = () => {
     CategoryService.deleteCategory(params.id).then((response) => {
       if (response.status === 200) {
         navigate("/categories")
       }
     },
       error => {
-        console.log("Network response was not ok.")
+        console.log("Network response was not ok.", error)
       }
     )
   };
@@ -35,29 +35,24 @@ const Category = () => {
   return (
     <div className="">
       <div className="hero position-relative d-flex align-items-center justify-content-center">
-        <img
-          src='https://picsum.photos/500/400'
-          alt={category.name}
-          className="img-fluid position-absolute"
-        />
         <div className="overlay bg-dark position-absolute" />
         <h1 className="display-4 position-relative text-black">
           {category.name}
         </h1>
       </div>
-      <div className="container py-5">
+      <div className="container py-1">
         <div className="row">
           <div className="col-sm-12 col-lg-2">
             <button
               type="button"
               className="btn btn-danger"
-              onClick={deleteCategory}
+              onClick={handleDelete}
             >
               Delete Category
             </button>
+            <LinkButton linkTo="/categories" buttonText="Back to Categories" color='blue' />
           </div>
         </div>
-        <LinkButton linkTo="/categories" buttonText="Back to Categories" color='blue' />
       </div>
     </div>
   );

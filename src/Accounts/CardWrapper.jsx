@@ -56,7 +56,7 @@ function Card({ data }) {
       </FieldWrapper>
       <FieldWrapper>
         <Label>Balance:</Label>
-        <Value>{`$${(balance_cents / 100).toFixed(2)} `}</Value>
+        <Value>{`$ ${(balance_cents / 100).toFixed(2)} `}</Value>
       </FieldWrapper>
       <FieldWrapper>
         <Label>Last update:</Label>

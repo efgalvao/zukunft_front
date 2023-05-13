@@ -1,0 +1,38 @@
+.subtitle {
+  font-size: 25px;
+  font-weight: 900;
+  margin: 15px;
+  padding: 10px;
+  background-color: crimson;
+  color: white;
+}
+
+.summary-table {
+  margin: 15px;
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.summary-table thead {
+  background-color: #f8f8f8;
+}
+
+.summary-table th,
+.summary-table td {
+  padding: 12px;
+  text-align: left;
+}
+
+.summary-table th {
+  font-weight: bold;
+}
+
+.summary-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.summary-table tbody tr:hover {
+  background-color: #e6e6e6;
+}

@@ -1,22 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AccountService from "../services/account.service";
 import styled from 'styled-components';
 import { LinkButton } from '../Common/Buttons';
-
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 20px;
-`;
-
-const Label = styled.label`
-  font-weight: bold;
-`;
-
-const Value = styled.span`
-  margin-left: 10px;
-`;
+import AccountSummary from "./AccountSummary";
 
 const Title = styled.h1`
   font-size: 3rem;
@@ -65,21 +52,8 @@ const Account = () => {
         </div>
 
       </div>
-      <div className="container py-5">
-        <Wrapper>
-          <div>
-            <Label>Kind:</Label>
-            <Value>{account.kind}</Value>
-          </div>
-          <div>
-            <Label>Balance:</Label>
-            <Value>{account.balance_cents}</Value>
-          </div>
-          <div>
-            <Label>Date:</Label>
-            <Value>{account.date}</Value>
-          </div>
-        </Wrapper>
+      <AccountSummary balance={account.balance_cents} kind={account.kind} lastUpdate={account.updated_at} />
+      <div className="container py-1">
         <div className="row">
           <div className="col-sm-12 col-lg-2">
             <button

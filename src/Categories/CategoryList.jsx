@@ -38,7 +38,7 @@ const CategoryList = () => {
   return (
     <>
       <section className="jumbotron jumbotron-fluid text-center">
-        <div className="container py-5">
+        <div className="container py-1">
           <h1 className="display-4">Categories for every occasion</h1>
           <p className="lead text-muted">
             We’ve pulled together our most popular categories, so there’s sure to be something

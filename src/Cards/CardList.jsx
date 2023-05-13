@@ -37,7 +37,7 @@ const CardList = () => {
   return (
     <>
       <section className="jumbotron jumbotron-fluid text-center">
-        <div className="container py-5">
+        <div className="container py-1">
           <h1 className="display-4">Cards for every occasion</h1>
           <p className="lead text-muted">
             Here are all your cards.

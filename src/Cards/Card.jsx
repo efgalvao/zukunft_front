@@ -61,7 +61,7 @@ const Card = () => {
       <div>
         <Title>{card.name}</Title>
       </div>
-      <div className="container py-5">
+      <div className="container py-1">
         <Wrapper>
           <div>
             <Label>Kind:</Label>
