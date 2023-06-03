@@ -30,4 +30,11 @@ export function CustomButton({ buttonText, color, type = 'button' }) {
   );
 }
 
-export default CustomButton;
+export function FunctionButton({ buttonText, color, type = 'button', onClick }) {
+  return (
+    <Button color={color} type={type} onClick={onClick}>
+      {buttonText}
+    </Button>
+  );
+
+}

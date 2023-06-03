@@ -11,7 +11,6 @@ const AccountList = () => {
   useEffect(() => {
     AccountService.getAccountList().then((res) => {
       if (res.status === 200) {
-
         setAccounts(res.data)
         return res.data;
       }

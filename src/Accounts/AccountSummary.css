@@ -1,18 +1,19 @@
 .subtitle {
+  width: fill-available;
+  margin: 15px;
   font-size: 25px;
   font-weight: 900;
-  margin: 15px;
   padding: 10px;
-  background-color: crimson;
+  background-color: lime;
   color: white;
 }
 
 .summary-table {
-  margin: 15px;
-  width: 100%;
+  margin: 0 15px;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   color: #333;
+  width: -webkit-fill-available;
 }
 
 .summary-table thead {
@@ -21,6 +22,7 @@
 
 .summary-table th,
 .summary-table td {
+  margin: 15px;
   padding: 12px;
   text-align: left;
 }
