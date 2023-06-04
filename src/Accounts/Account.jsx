@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import AccountService from "../services/account.service";
 import styled from 'styled-components';
 import { LinkButton } from '../Common/Buttons';
@@ -11,6 +11,7 @@ import './Account.css';
 import PastTotalBalanceChart from "./PastTotalBalanceChart";
 import PastReportsList from "./PastReportsList";
 import PastReportsChart from "./PastReportsChart";
+import NewStock from "../Stocks/NewStock";
 
 const Title = styled.h1`
   font-size: 3rem;
@@ -34,6 +35,7 @@ const Account = () => {
     start_date: sixMonthAgo,
     end_date: currentDate
   }
+
 
   useEffect(() => {
     AccountService.getAccount(params.id).then((response) => {
@@ -81,6 +83,7 @@ const Account = () => {
     )
   };
 
+
   return (
     <div className="">
       <div className='title'>
@@ -88,6 +91,10 @@ const Account = () => {
         <div className="buttons">
           <LinkButton linkTo={`/accounts/${account.id}/transactions`} buttonText="Transactions" color="green" />
           <LinkButton linkTo={`/accounts/${account.id}/transaction`} buttonText="New Transaction" color="blue" />
+          {account.kind === "broker" &&
+            <NewStock accountId={account.id} accountName={account.name} />
+          }
+
         </div>
       </div>
 
