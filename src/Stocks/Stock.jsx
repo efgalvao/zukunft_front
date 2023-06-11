@@ -5,9 +5,10 @@ import styled from 'styled-components';
 import { LinkButton } from '../Common/Buttons';
 
 import DividendChart from "../Dividends/DividendChart";
-import PriceChart from "./PriceChart";
+import PriceChart from "../Prices/PriceChart";
 import NegotiationList from "./NegotiationList";
 import NewDividend from "../Dividends/NewDividend";
+import NewPrice from "../Prices/NewPrice";
 
 const Wrapper = styled.div`
   display: grid;
@@ -66,6 +67,7 @@ const Stock = () => {
       </div>
       <div className="container py-1">
         <NewDividend stockId={params.stockId} />
+        <NewPrice stockId={params.stockId} />
         <Wrapper>
           <table className="summary-table">
             <thead>

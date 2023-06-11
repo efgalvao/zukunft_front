@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import dividendServiceInstance from "../services/dividend.service";
+import priceServiceInstance from "../services/prices.service";
 import 'react-datepicker/dist/react-datepicker.css';
 import { CustomButton, FunctionButton } from "../Common/Buttons";
 import DatePicker from 'react-datepicker';
@@ -20,7 +20,7 @@ const Button = styled.button`
 `;
 
 
-const NewDividend = ({ stockId }) => {
+const NewPrice = ({ stockId }) => {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     valueCents: '',
@@ -43,14 +43,15 @@ const NewDividend = ({ stockId }) => {
     event.preventDefault();
 
     const body = {
-      'dividends': {
-        'stock_id': stockId,
+      'prices': {
+        'parent_kind': 'stock',
+        'parent_id': stockId,
         'date': formValues.date,
         'value_cents': formValues.valueCents
       }
     };
 
-    dividendServiceInstance.createDividend(body).then((response) => {
+    priceServiceInstance.createPrice(body).then((response) => {
       if (response.status === 201) {
         setIsModalOpen(false);
       }
@@ -75,7 +76,7 @@ const NewDividend = ({ stockId }) => {
   return (
     <>
       <Button color="blue" onClick={handleOpenModal}>
-        Novo Dividendo
+        Novo Preço
       </Button>
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
@@ -83,11 +84,11 @@ const NewDividend = ({ stockId }) => {
           <div className="row">
             <div className="col-sm-12 col-lg-6 offset-lg-3">
               <h1 className="font-weight-normal mb-5">
-                Novo dividendo
+                Novo preço
               </h1>
               <form onSubmit={onSubmit}>
                 <div className="form-group">
-                  <label htmlFor="transactionTitle">Valor: </label>
+                  <label htmlFor="transactionTitle">Preço: </label>
                   <input
                     type="number"
                     name="valueCents"
@@ -111,7 +112,7 @@ const NewDividend = ({ stockId }) => {
                   />
                 </div>
 
-                <CustomButton type="submit" buttonText="Criar dividendo" color="green" />
+                <CustomButton type="submit" buttonText="Registrar preço" color="green" />
                 <FunctionButton linkTo={`/stock/${stockId}}`} buttonText="Voltar" color="blue" onClick={handleCloseModal} />
               </form>
             </div>
@@ -122,4 +123,4 @@ const NewDividend = ({ stockId }) => {
   );
 };
 
-export default NewDividend;
+export default NewPrice;
