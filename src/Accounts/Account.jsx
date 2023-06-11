@@ -116,7 +116,7 @@ const Account = () => {
       <PastTotalBalanceChart data={reports} />
       <PastReportsList reports={reports} />
       <PastReportsChart data={reports} />
-      {stocks.length > 0 &&
+      {stocks && stocks.length > 0 &&
         <StockList stocks={stocks} />
       }
 
