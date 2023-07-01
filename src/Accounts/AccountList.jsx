@@ -46,7 +46,7 @@ const AccountList = () => {
       </section>
       <div className="py-5">
         <main className="container">
-          <div className="text-end mb-3">
+          <div className="mb-3">
             <LinkButton linkTo="/account" buttonText="Create New Account" color="green" />
           </div>
           <div className="row">
