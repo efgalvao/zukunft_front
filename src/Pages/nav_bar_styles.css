@@ -81,6 +81,19 @@
   }
 
   .nav_container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .menu_switch {
+    width: var(--nav_bar_height);
+    height: var(--nav_bar_height);
+    position: static;
+    font-size: 4em;
+    pointer-events: all;
+  }
+
+  .nav_container {
     transform: translateX(-100%);
   }
 
@@ -97,11 +110,13 @@
   }
 
   .menu_items {
+    position: initial;
+    margin-top: 30px;
     flex-direction: column;
   }
 
   .menu_items li {
-    font-size: 50px;
+    font-size: 20px;
     margin-bottom: 6px;
   }
 }
