@@ -71,7 +71,7 @@ const Account = () => {
       setReport({ updated_at: "0", balance: 0, income: 0, expense: 0 })
       navigate("/accounts");
     });
-    stockServiceInstance.getStockList().then((response) => {
+    stockServiceInstance.getStockList(params.id).then((response) => {
       if (response.status === 200) {
         setStocks(response.data)
         return response.data;
@@ -120,7 +120,7 @@ const Account = () => {
         <StockList stocks={stocks} />
       }
 
-      <div className="buttons">
+      <div className="container py-2">
         <FunctionButton buttonText="Delete Account" color="red" onClick={handleDelete} type="button" />
 
         <LinkButton linkTo={'/accounts'} buttonText="Back to Accounts" color="blue" />

@@ -30,22 +30,7 @@ const Stock = () => {
   const [stock, setStock] = useState('');
 
   const valuePerShare = (stock) => {
-    return stock.invested_value_cents / stock.shares_total || 0
-  };
-
-  const formattedDate = (date) => {
-    const options = {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
-    };
-
-    const formattedDateString = date.toLocaleDateString('pt-BR', options);
-
-    return `${formattedDateString}`;
+    return (stock.invested_value_cents / 100).toFixed(2) / stock.shares_total || 0
   };
 
   useEffect(() => {
@@ -65,9 +50,11 @@ const Stock = () => {
       <div className="subtitle">
         <Title>{stock.ticker}</Title>
       </div>
-      <div className="container py-1">
+      <div className="container py-3">
         <NewDividend stockId={params.stockId} />
         <NewPrice stockId={params.stockId} />
+      </div>
+      <div>
         <Wrapper>
           <table className="summary-table">
             <thead>
@@ -76,7 +63,7 @@ const Stock = () => {
                 <th>Valor investido por cota:</th>
                 <th>Valor total atual</th>
                 <th>Valor atual por cota:</th>
-                <th>Ultima atualizacao:</th>
+                <th>Quantitade de cotas:</th>
               </tr>
             </thead>
             <tbody>
@@ -85,7 +72,7 @@ const Stock = () => {
                 <td>$ {valuePerShare(stock)}</td>
                 <td>{`$ ${(stock.current_total_value_cents / 100).toFixed(2)} `}</td>
                 <td>{`$ ${(stock.current_value_cents / 100).toFixed(2)} `}</td>
-                <td>{formattedDate(new Date(stock.updated_at))}</td>
+                <td>{stock.shares_total}</td>
               </tr>
             </tbody>
           </table >
@@ -101,7 +88,9 @@ const Stock = () => {
           <NegotiationList negotiations={stock.negotiations} />
         }
 
-        <LinkButton linkTo={`/account/${stock.account_id}`} buttonText="Ir para conta" color="blue" />
+        <div className="container py-3">
+          <LinkButton linkTo={`/account/${stock.account_id}`} buttonText="Ir para conta" color="blue" />
+        </div>
       </div>
     </div >
   );

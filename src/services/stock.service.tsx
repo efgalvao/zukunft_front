@@ -5,8 +5,9 @@ const API_URL = "http://127.0.0.1:3000/";
 
 class StockService {
 
-  getStockList() {
-    return axios.get(API_URL + 'api/v1/investments/stocks', { headers: authHeader() });
+  getStockList(accountId: number) {
+    return axios.get(API_URL + 'api/v1/investments/stocks',
+      { params: { account_id: accountId, }, headers: authHeader() });
   }
 
   getStock(stockId: number) {
@@ -18,7 +19,8 @@ class StockService {
   }
 
   updateStock(body: any, stockId: number) {
-    return axios.put(API_URL + `api/v1/investments/stocks/${stockId}`, body, { headers: authHeader() });
+    return axios.put(API_URL + `api/v1/investments/stocks/${stockId}`,
+      body, { headers: authHeader() });
   }
 }
 

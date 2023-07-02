@@ -21,7 +21,7 @@ const StockList = ({ stocks }) => {
   };
 
   const valuePerShare = (stock) => {
-    return stock.attributes.invested_value_cents / stock.attributes.shares_total || 0
+    return (stock.attributes.invested_value_cents / 100).toFixed(2) / stock.attributes.shares_total || 0
   };
 
   return (
@@ -36,7 +36,7 @@ const StockList = ({ stocks }) => {
             <th>Valor investido por cota:</th>
             <th>Valor total atual</th>
             <th>Valor atual por cota:</th>
-            <th>Ultima atualizacao:</th>
+            <th>Quantidade de cotas:</th>
           </tr>
         </thead>
         <tbody>
@@ -48,11 +48,11 @@ const StockList = ({ stocks }) => {
                   {stock.attributes.ticker}
                 </Link>
               </td>
-              <td>{`$ ${stock.attributes.invested_value_cents.toFixed(2)}`}</td>
-              <td>$ {valuePerShare(stock)}</td>
-              <td>{`$ ${stock.attributes.current_total_value_cents.toFixed(2)}`}</td>
-              <td>{`$ ${stock.attributes.current_value_cents.toFixed(2)}`}</td>
-              <td>{formattedDate(new Date(stock.attributes.updated_at))}</td>
+              <td>{`$ ${(stock.attributes.invested_value_cents / 100).toFixed(2)}`}</td>
+              <td>$ {valuePerShare(stock).toFixed(2)}</td>
+              <td>{`$ ${(stock.attributes.current_total_value_cents / 100).toFixed(2)} `}</td>
+              <td>{`$ ${(stock.attributes.current_value_cents / 100).toFixed(2)}`}</td>
+              <td>{stock.attributes.shares_total}</td>
             </tr>
 
           ))}

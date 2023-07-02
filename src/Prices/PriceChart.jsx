@@ -26,7 +26,7 @@ const PriceChart = ({ prices = [] }) => {
 
       <ResponsiveContainer width="100%" height={400}>
         <LineChart data={formatedprices} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-          <Line name="prices" type="monotone" dataKey="value_cents" stroke="#5120d8" strokeWidth={2} />
+          <Line name="Cotação" type="monotone" dataKey="value_cents" stroke="#5120d8" strokeWidth={2} />
           <CartesianGrid stroke="#ccc" strokeDasharray="10 10" />
           <XAxis dataKey="date" />
           <YAxis />

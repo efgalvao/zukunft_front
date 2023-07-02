@@ -72,43 +72,41 @@ const NewStock = ({ accountId, accountName }) => {
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <div className="container mt-5">
-          <div className="row">
-            <div className="col-sm-12 col-lg-6 offset-lg-3">
-              <h1 className="font-weight-normal mb-5">
-                Add a new stock.
-              </h1>
-              <form onSubmit={onSubmit}>
-                <div className="form-group">
-                  <label htmlFor="transactionTitle">Stock Ticker</label>
-                  <input
-                    type="text"
-                    name="ticker"
-                    value={formValues.ticker}
-                    id="stockTicker"
-                    className="form-control"
-                    required
-                    onChange={onChange}
-                  />
-                </div>
+          <div className="col-sm-12 col-lg-6 offset-lg-3">
+            <h1 className="font-weight-normal mb-2">
+              Registrar nova ação.
+            </h1>
+            <form onSubmit={onSubmit}>
+              <div className="form-group">
+                <label htmlFor="transactionTitle">Stock Ticker</label>
+                <input
+                  type="text"
+                  name="ticker"
+                  value={formValues.ticker}
+                  id="stockTicker"
+                  className="form-control"
+                  required
+                  onChange={onChange}
+                />
+              </div>
 
-                <div className="form-group">
-                  <label htmlFor="transactionTitle">Account</label>
-                  <input
-                    type="text"
-                    name="accountId"
-                    value={accountName}
-                    id="stockTicker"
-                    className="form-control"
-                    required
-                    onChange={onChange}
-                    disabled
-                  />
-                </div>
+              <div className="form-group">
+                <label htmlFor="transactionTitle">Account</label>
+                <input
+                  type="text"
+                  name="accountId"
+                  value={accountName}
+                  id="stockTicker"
+                  className="form-control"
+                  required
+                  onChange={onChange}
+                  disabled
+                />
+              </div>
 
-                <CustomButton type="submit" buttonText="Create Stock" color="green" />
-                <FunctionButton linkTo={`/account/${accountId}}`} buttonText="Back to Account" color="blue" onClick={handleCloseModal} />
-              </form>
-            </div>
+              <FunctionButton type="submit" buttonText="Create Stock" color="green" onClick={handleCloseModal} />
+              <FunctionButton linkTo={`/account/${accountId}}`} buttonText="Back to Account" color="blue" onClick={handleCloseModal} />
+            </form>
           </div>
         </div>
       </Modal>
