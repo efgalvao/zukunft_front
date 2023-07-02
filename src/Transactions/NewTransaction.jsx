@@ -18,7 +18,6 @@ const NewTransaction = () => {
   });
   const [selectedDate, setSelectedDate] = useState(null);
 
-
   const onChange = (event) => {
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
@@ -31,7 +30,6 @@ const NewTransaction = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-
 
     const body = {
       'transaction': {
