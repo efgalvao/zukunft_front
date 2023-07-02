@@ -12,9 +12,10 @@ const CardWrapper = styled.div`
   border: 1px solid #e6e6e6;
   border-radius: 5px;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  width: 250px;
-  height: 90px;
+  padding: 20px;
+  width: 300px;
+  height: 200px;
+  margin-bottom: 10px;
 `;
 
 const Title = styled.h2`
@@ -42,7 +43,7 @@ const Value = styled.span`
 `;
 
 function Card({ data }) {
-  const { id, name, kind, balance_cents, updated_at } = data;
+  const { id, name, balance_cents, updated_at } = data;
   const formattedDate = new Date(updated_at).toLocaleString();
 
 
@@ -50,18 +51,15 @@ function Card({ data }) {
     <CardWrapper>
       <Title>{name}</Title>
       <FieldWrapper>
-        <Label>Kind:</Label>
-        <Value>{kind}</Value>
-      </FieldWrapper>
-      <FieldWrapper>
         <Label>Balance:</Label>
-        <Value>{`$${(balance_cents / 100).toFixed(2)}`}</Value>
+        <Value>{`$ ${(balance_cents / 100).toFixed(2)} `}</Value>
       </FieldWrapper>
       <FieldWrapper>
         <Label>Last update:</Label>
         <Value>{formattedDate}</Value>
       </FieldWrapper>
-      <LinkButton linkTo={`/cards/${id}`} buttonText="Details" color='blue' />
+      <LinkButton linkTo={`/cards/${id}`} buttonText='Ver detalhes' color='blue' />
+
     </CardWrapper>
   );
 }
@@ -76,4 +74,4 @@ Card.propTypes = {
   }).isRequired,
 };
 
-export default CardWrapper;
+export default Card;

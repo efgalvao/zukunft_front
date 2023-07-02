@@ -96,7 +96,6 @@ const Account = () => {
     )
   };
 
-
   return (
     <div className="">
       <div className='title'>
