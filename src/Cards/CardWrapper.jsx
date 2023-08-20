@@ -43,7 +43,8 @@ const Value = styled.span`
 `;
 
 function Card({ data }) {
-  const { id, name, balance_cents, updated_at } = data;
+  const { id } = data;
+  const { name, balance_cents, updated_at } = data.attributes;
   const formattedDate = new Date(updated_at).toLocaleString();
 
 
@@ -52,7 +53,7 @@ function Card({ data }) {
       <Title>{name}</Title>
       <FieldWrapper>
         <Label>Balance:</Label>
-        <Value>{`$ ${(balance_cents / 100).toFixed(2)} `}</Value>
+        <Value>{`R$ ${(balance_cents / 100).toFixed(2)} `}</Value>
       </FieldWrapper>
       <FieldWrapper>
         <Label>Last update:</Label>

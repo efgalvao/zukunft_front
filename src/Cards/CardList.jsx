@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import CardService from "../services/card.service";
 import CardWrapper from "./CardWrapper";
 import { LinkButton } from '../Common/Buttons';
+import NewCard from "./NewCard";
 
 const CardList = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const CardList = () => {
   }, []);
 
   const allCards = cards.map((card, index) => (
-    <div>
+    <div key={index} className="col-md-6 col-lg-4">
       <CardWrapper data={card} />
     </div>
   ));
@@ -39,15 +40,12 @@ const CardList = () => {
       <section className="jumbotron jumbotron-fluid text-center">
         <div className="container py-1">
           <h1 className="display-4">Cartões</h1>
-          <p className="lead text-muted">
-            Todos os cartões.
-          </p>
         </div>
       </section>
       <div className="py-5">
         <main className="container">
           <div className="text-end mb-3">
-            <LinkButton linkTo="/card" buttonText="Cadastrar novo cartão" color="green" />
+            <NewCard />
           </div>
           <div className="row">
             {cards.length > 0 ? allCards : noCard}
