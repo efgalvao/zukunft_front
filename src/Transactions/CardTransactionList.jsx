@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import TransactionService from "../services/transaction.service";
 import Statement from "./StatementWrapper";
 import { LinkButton } from "../Common/Buttons";
+import NewTransaction from "../Transactions/NewTransaction";
 
 const CardTransactionList = () => {
   const navigate = useNavigate();
@@ -11,8 +12,6 @@ const CardTransactionList = () => {
 
   useEffect(() => {
     TransactionService.getTransactionList(cardId).then((res) => {
-      console.log(' CardTransactionList.jsx');
-      console.log(cardId);
       if (res.status === 200) {
         setTransactions(res.data)
         return res.data;
@@ -41,16 +40,13 @@ const CardTransactionList = () => {
     <>
       <section className="jumbotron jumbotron-fluid text-center">
         <div className="container py-1">
-          <h1 className="display-4">Transactions</h1>
-          <p className="lead text-muted">
-            Todas transações do cartão.
-          </p>
+          <h1 className="display-4">Transações</h1>
         </div>
       </section>
       <div className="py-5">
         <main className="container py-2">
           <div className="mb-3">
-            <LinkButton linkTo={`/cards/${cardId}/transaction`} buttonText="Create New Transaction" color="blue" />
+            <NewTransaction />
           </div>
           <div className="container py-2">
             {transactions.length > 0 ? allTransactions : noTransaction}
