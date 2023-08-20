@@ -1,29 +1,49 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CardService from "../services/card.service";
-import { LinkButton, CustomButton } from '../Common/Buttons';
+import cardServiceInstance from "../services/card.service";
+import { CustomButton, FunctionButton } from "../Common/Buttons";
+
+import Modal from './Modal';
+
+import styled from 'styled-components';
+
+const Button = styled.button`
+  background-color: ${props => props.color || 'green'};
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin: 10px 10px 0 0;
+`;
 
 const NewCard = () => {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     name: '',
-    balance: '',
-    kind: 'savings'
+    balance_cents: ''
   });
 
-  const onChange = (event, setFunction) => {
+  const onChange = (event) => {
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const body = { 'account': { 'name': formValues.name, 'kind': formValues.kind, 'balance_cents': formValues.balance } };
 
-    CardService.createCard(body).then((response) => {
+    const body = {
+      'card': {
+        'name': formValues.name,
+        'balance_cents': formValues.balance_cents,
+        'kind': 'card'
+      }
+    };
+
+    cardServiceInstance.createCard(body).then((response) => {
+      console.log('body', body)
       if (response.status === 201) {
-        console.log(response.data)
-        navigate(`/cards/${response.data.id}`)
+        setIsModalOpen(false);
       }
     },
       error => {
@@ -32,57 +52,66 @@ const NewCard = () => {
     )
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+
   return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-sm-12 col-lg-6 offset-lg-3">
-          <h1 className="font-weight-normal mb-5">
-            Add a new card.
-          </h1>
-          <form onSubmit={onSubmit}>
-            <div className="form-group">
-              <label htmlFor="cardName">Card name</label>
-              <input
-                type="text"
-                name="name"
-                value={formValues.name}
-                id="cardName"
-                className="form-control"
-                required
-                onChange={onChange}
-              />
-            </div>
+    <>
+      <Button color="blue" onClick={handleOpenModal}>
+        Novo Cartão
+      </Button>
 
-            <div className="form-group">
-              <label htmlFor="cardBalance">Card balance</label>
-              <input
-                type="number"
-                name="balance"
-                value={formValues.balance}
-                className="form-control"
-                required
-                onChange={onChange}
-              />
-            </div>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <div className="container mt-5">
+          <div className="row">
+            <div className="col-sm-12 col-lg-6 offset-lg-3">
+              <h1 className="font-weight-normal mb-5">
+                Nova transação
+              </h1>
+              <form onSubmit={onSubmit}>
+                <div className="form-group">
+                  <label htmlFor="cardName" className="text-left">Nome: </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formValues.name}
+                    id="cardName"
+                    className="form-control"
+                    required
+                    onChange={onChange}
+                  />
+                </div>
 
-            <div className="form-group">
-              <label htmlFor="cardKind">Card kind</label>
-              <select
-                type="text"
-                name="kind"
-                value={formValues.kind}
-                className="form-control"
-                required
-                onChange={onChange}>
-                <option value="card">Card</option>
-              </select>
+                <div className="form-group">
+                  <label htmlFor="cardBalance" className="text-left">Balanço: </label>
+                  <input
+                    type="text"
+                    name="balance_cents"
+                    value={formValues.balance_cents}
+                    id="cardBalance"
+                    className="form-control"
+                    required
+                    pattern="[0-9]+(\.[0-9]+)?"
+                    onChange={onChange}
+                  />
+                </div>
+
+                <CustomButton type="submit" buttonText="Criar cartão" color="green" />
+                <FunctionButton linkTo={'/cards'} buttonText="Voltar" color="blue" onClick={handleCloseModal} />
+              </form>
             </div>
-            <CustomButton buttonText='Create Card' color='green' type='submit' />
-            <LinkButton to='cards' buttonText='Back to cards' color='blue' />
-          </form>
+          </div>
         </div>
-      </div>
-    </div>
+      </Modal>
+    </>
   );
 };
 
