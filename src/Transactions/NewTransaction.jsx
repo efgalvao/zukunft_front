@@ -1,21 +1,39 @@
-import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import TransactionService from "../services/transaction.service";
-import DatePicker from 'react-datepicker';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import transactionServiceInstance from "../services/transaction.service";
+import categoryServiceInstance from "../services/category.service";
+import { CustomButton, FunctionButton } from "../Common/Buttons";
 import 'react-datepicker/dist/react-datepicker.css';
-import { CustomButton, LinkButton } from "../Common/Buttons";
+import DatePicker from 'react-datepicker';
 
-const NewTransaction = () => {
-  const params = useParams();
-  const accountId = params.accountId;
+import Modal from './Modal';
+
+import styled from 'styled-components';
+
+const Button = styled.button`
+  background-color: ${props => props.color || 'green'};
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin: 10px 10px 0 0;
+`;
+
+const NewTransactionModal = ({ id }) => {
+  console.log('id', id)
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
-    name: '',
+    title: '',
+    category_id: '',
+    kind: '',
     value: '',
-    kind: 'expense',
-    date: '',
-    category_id: ''
+    date: ''
   });
+
+  const [categories, setCategories] = useState([]);
+
+
   const [selectedDate, setSelectedDate] = useState(null);
 
   const onChange = (event) => {
@@ -33,18 +51,18 @@ const NewTransaction = () => {
 
     const body = {
       'transaction': {
+        'account_id': id,
         'title': formValues.title,
+        'category_id': formValues.category_id,
         'kind': formValues.kind,
         'value': formValues.value,
-        'date': formValues.date,
-        'category_id': formValues.category,
-        'account_id': accountId
+        'date': formValues.date
       }
     };
 
-    TransactionService.createTransaction(accountId, body).then((response) => {
+    transactionServiceInstance.createTransaction(body).then((response) => {
       if (response.status === 201) {
-        navigate(`/accounts/${accountId}/transactions`)
+        setIsModalOpen(false);
       }
     },
       error => {
@@ -53,72 +71,125 @@ const NewTransaction = () => {
     )
   };
 
+  useEffect(() => {
+    categoryServiceInstance.getCategoryList().then((response) => {
+      if (response.status === 200) {
+        setCategories(response.data)
+        return response
+      }
+    },
+      error => {
+        console.log("Network response was not ok.")
+        navigate("/");
+      });
+  }, []);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+
   return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-sm-12 col-lg-6 offset-lg-3">
-          <h1 className="font-weight-normal mb-5">
-            Add a new transaction.
-          </h1>
-          <form onSubmit={onSubmit}>
-            <div className="form-group">
-              <label htmlFor="transactionTitle">Transaction title</label>
-              <input
-                type="text"
-                name="title"
-                value={formValues.title}
-                id="transactionTitle"
-                className="form-control"
-                required
-                onChange={onChange}
-              />
-            </div>
+    <>
+      <Button color="blue" onClick={handleOpenModal}>
+        Nova transação
+      </Button>
 
-            <div className="form-group">
-              <label htmlFor="transactionValue">Transaction Value</label>
-              <input
-                type="number"
-                name="value"
-                value={formValues.value}
-                className="form-control"
-                required
-                onChange={onChange}
-              />
-            </div>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <div className="container mt-5">
+          <div className="row">
+            <div className="col-sm-12 col-lg-6 offset-lg-3">
+              <h1 className="font-weight-normal mb-5">
+                Nova transação
+              </h1>
+              <form onSubmit={onSubmit}>
+                <div className="form-group">
+                  <label htmlFor="transactionTitle">Titulo: </label>
+                  <input
+                    type="text"
+                    name="title"
+                    value={formValues.title}
+                    id="transactionTitle"
+                    className="form-control"
+                    required
+                    onChange={onChange}
+                  />
+                </div>
 
-            <div className="form-group">
-              <label htmlFor="transactionKind">Kind of transaction</label>
-              <select
-                type="text"
-                name="kind"
-                value={formValues.kind}
-                className="form-control"
-                required
-                onChange={onChange}>
-                <option value="income">Income</option>
-                <option value="expense">Expense</option>
-              </select>
-            </div>
+                <div className="form-group">
+                  <label htmlFor="transactionValue">Valor: </label>
+                  <input
+                    type="text"
+                    name="value"
+                    value={formValues.value}
+                    id="transactionValue"
+                    className="form-control"
+                    required
+                    pattern="[0-9]+(\.[0-9]+)?"
+                    onChange={onChange}
+                  />
+                </div>
 
-            <div className="form-group">
-              <label htmlFor="date">Date of transaction</label>
-              <DatePicker
-                selected={selectedDate}
-                onChange={handleChange}
-                name="date"
-                className="form-control"
-                required
-                dateFormat="dd-MM-yyyy"
-              />
-            </div>
+                <div className="form-group">
+                  <label htmlFor="transactionKind">Tipo de transação</label>
+                  <select
+                    type="text"
+                    name="kind"
+                    id="transactionKind"
+                    value={formValues.kind}
+                    className="form-control"
+                    required
+                    onChange={onChange}>
+                    <option value="income">Entrada</option>
+                    <option value="expense">Saída</option>
+                    <option value="" disabled hidden>Selecione uma opção</option>
 
-            <CustomButton type="submit" buttonText="Create Transaction" color="green" />
-            <LinkButton linkTo={`/account/${params.accountId}`} buttonText="Back to Account" color="blue" />
-          </form>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="transactionCategory">Categoria da transação</label>
+                  <select
+                    type="text"
+                    name="category_id"
+                    id="transactionCategory"
+                    value={formValues.category_id}
+                    className="form-control"
+                    required
+                    onChange={onChange}>
+                    <option value="" disabled hidden>Selecione uma categoria</option>
+                    {categories.map(category => (
+                      <option key={category.id} value={category.id}>{category.attributes.name}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="transactionTitle">Data: </label>
+                  <DatePicker
+                    selected={selectedDate}
+                    onChange={handleChange}
+                    name="date"
+                    className="form-control"
+                    required
+                    dateFormat="dd-MM-yyyy"
+                  />
+                </div>
+
+                <CustomButton type="submit" buttonText="Criar cartão" color="green" />
+                <FunctionButton linkTo={'/cards'} buttonText="Voltar" color="blue" onClick={handleCloseModal} />
+              </form>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </Modal>
+    </>
   );
 };
 
-export default NewTransaction;
+export default NewTransactionModal;

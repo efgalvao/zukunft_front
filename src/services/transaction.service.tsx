@@ -13,8 +13,8 @@ class TransactionService {
     return axios.get(API_URL + `api/v1/accounts/${accountId}/transactions/${id}`, { headers: authHeader() });
   }
 
-  createTransaction(accountId: number, body: any) {
-    return axios.post(API_URL + `api/v1/accounts/${accountId}/transactions`, body, { headers: authHeader() });
+  createTransaction(body: any) {
+    return axios.post(API_URL + `api/v1/accounts/${body.transaction.account_id}/transactions`, body, { headers: authHeader() });
   }
 
   updateTransaction(body: any) {

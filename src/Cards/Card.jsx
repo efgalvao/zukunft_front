@@ -1,50 +1,84 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CardService from "../services/card.service";
-import styled from 'styled-components';
-import { LinkButton } from '../Common/Buttons';
-
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 20px;
-`;
-
-const Label = styled.label`
-  font-weight: bold;
-`;
-
-const Value = styled.span`
-  margin-left: 10px;
-`;
-
-const Title = styled.h1`
-  font-size: 3rem;
-  font-weight: bold;
-  color: #333;
-  text-align: center;
-  margin-bottom: 2rem;
-`;
+import AccountReportService from "../services/account.report.service";
+import { Wrapper, Title, SubTitle } from './styles';
+import { LinkButton, FunctionButton } from '../Common/Buttons';
+import PastReportsChart from "./PastReportsChart";
+import FutureReportsChart from "./FutureReportsChart";
+import NewTransaction from "../Transactions/NewTransaction";
 
 const Card = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const [card, setCard] = useState('');
+  const [card, setCard] = useState({ attributes: {} });
+  const [currentReport, setCurrentReport] = useState({ attributes: {} });
+  const [pastReports, setPastReports] = useState([]);
+  const [futureReports, setFutureReports] = useState([]);
+
+
+  const currentDate = new Date();
+  const sixMonthAgo = new Date(currentDate.getFullYear(), currentDate.getMonth() - 6, currentDate.getDate());
+  const pastReportsRequest = {
+    account_id: params.id,
+    start_date: sixMonthAgo,
+    end_date: currentDate
+  }
+  const sixMonthFromNow = new Date(currentDate.getFullYear(), currentDate.getMonth() + 6, currentDate.getDate());
+  const futureReportsRequest = {
+    account_id: params.id,
+    start_date: currentDate,
+    end_date: sixMonthFromNow
+  }
+
 
   useEffect(() => {
     CardService.getCard(params.id).then((response) => {
-      console.log(response)
+
       if (response.status === 200) {
         setCard(response.data)
         return response.data;
       }
     }, error => {
       console.log("Network response was not ok.")
-      navigate("/accounts");
+      navigate("/cards");
+    });
+    AccountReportService.getCurrentAccountReport(params.id).then((response) => {
+      if (response.status === 200) {
+        setCurrentReport(response.data)
+
+        return response.data;
+      }
+    }, error => {
+      console.log("Network response was not ok." + error)
+      pastReportsRequest({})
+      navigate("/cards");
+    });
+    AccountReportService.getAccountReports(pastReportsRequest).then((response) => {
+      if (response.status === 200) {
+        setPastReports(response.data)
+
+        return response.data;
+      }
+    }, error => {
+      console.log("Network response was not ok." + error)
+      pastReportsRequest({})
+      navigate("/cards");
+    });
+    AccountReportService.getAccountReports(futureReportsRequest).then((response) => {
+      if (response.status === 200) {
+        setFutureReports(response.data)
+
+        return response.data;
+      }
+    }, error => {
+      console.log("Network response was not ok." + error)
+      setFutureReports({})
+      navigate("/cards");
     });
   }, [params.id]);
 
-  const deleteCard = () => {
+  const handleDelete = () => {
     CardService.deleteCard(params.id).then((response) => {
       if (response.status === 200) {
         navigate("/cards")
@@ -57,37 +91,63 @@ const Card = () => {
   };
 
   return (
+
     <div className="">
-      <div>
-        <Title>{card.name}</Title>
-      </div>
-      <div className="container py-1">
-        <Wrapper>
-          <div>
-            <Label>Kind:</Label>
-            <Value>{card.kind}</Value>
-          </div>
-          <div>
-            <Label>Balance:</Label>
-            <Value>{card.balance_cents}</Value>
-          </div>
-          <div>
-            <Label>Date:</Label>
-            <Value>{card.date}</Value>
-          </div>
-        </Wrapper>
-        <div className="row">
-          <div className="col-sm-12 col-lg-2">
-            <button
-              type="button"
-              className="btn btn-danger"
-              onClick={deleteCard}
-            >
-              Delete Card
-            </button>
-          </div>
+      <div className='title'>
+        <Title>{card.attributes.name}</Title>
+        <div className="buttons">
+          <LinkButton linkTo={`/cards/${card.id}/transactions`} buttonText="Transações" color="blue" />
+          <NewTransaction id={card.id} />
         </div>
-        <LinkButton to='cards' color='blue' buttonText='Back to Cards' />
+      </div>
+
+      <div className="container py-1">
+        <SubTitle>
+          Resumo
+        </SubTitle>
+        <table className="summary-table">
+          <thead>
+            <tr>
+              <th>Saldo:</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{`R$ ${(card.attributes.balance_cents / 100).toFixed(2)} `}</td>
+            </tr>
+          </tbody>
+        </table >
+
+        <SubTitle>
+          Resumo do Mês
+        </SubTitle>
+        <Wrapper>
+          <table className="summary-table">
+            <thead>
+              <tr>
+                <th>Recebimentos:</th>
+                <th>Gastos:</th>
+                <th>Balanço:</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{`R$ ${(currentReport.attributes.incomes_cents / 100).toFixed(2)} `}</td>
+                <td>{`R$ ${(currentReport.attributes.expenses_cents / 100).toFixed(2)} `}</td>
+                <td>{`R$ ${(currentReport.attributes.final_balance_cents / 100).toFixed(2)} `}</td>
+              </tr>
+            </tbody>
+          </table >
+
+        </Wrapper>
+        <PastReportsChart data={pastReports} />
+        <FutureReportsChart data={futureReports} />
+
+        <div className="container py-2">
+          <FunctionButton buttonText="Apagar Cartão" color="red" onClick={handleDelete} type="button" />
+
+          <LinkButton linkTo={'/cards'} buttonText="Voltar para Cartões" color="blue" />
+        </div>
       </div>
     </div>
   );

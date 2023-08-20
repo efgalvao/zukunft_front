@@ -46,7 +46,7 @@ function Statement({ transactions }) {
       <StatementTableCell>{transaction.title}</StatementTableCell>
       <StatementTableCell>{transaction.value_cents / 100}</StatementTableCell>
       <StatementTableCell>{transaction.kind}</StatementTableCell>
-      <StatementTableCell>{new Date(transaction.date).toLocaleString()}</StatementTableCell>
+      <StatementTableCell>{new Date(transaction.date).toLocaleDateString('pt-BR')}</StatementTableCell>
       <StatementTableCell>
         <Link to={`/update-transaction/${transaction.id}`} state={{ transaction }}>Update</Link>
       </StatementTableCell>
@@ -55,14 +55,14 @@ function Statement({ transactions }) {
 
   return (
     <StatementWrapper>
-      <StatementHeader>Statement for Account </StatementHeader>
+      <StatementHeader>Transações</StatementHeader>
       <StatementTable>
         <thead>
           <StatementTableHeader>
-            <StatementTableHeaderCell>Description</StatementTableHeaderCell>
-            <StatementTableHeaderCell>Amount</StatementTableHeaderCell>
-            <StatementTableHeaderCell>Kind</StatementTableHeaderCell>
-            <StatementTableHeaderCell>Date</StatementTableHeaderCell>
+            <StatementTableHeaderCell>Descrição</StatementTableHeaderCell>
+            <StatementTableHeaderCell>Valor</StatementTableHeaderCell>
+            <StatementTableHeaderCell>Tipo</StatementTableHeaderCell>
+            <StatementTableHeaderCell>Data</StatementTableHeaderCell>
           </StatementTableHeader>
         </thead>
         <tbody>
