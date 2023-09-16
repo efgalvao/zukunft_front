@@ -2,7 +2,7 @@ import React from 'react';
 import './AccountSummary.css';
 
 const AccountSummary = ({ account }) => {
-  const formattedDate = new Date(account.updated_at).toLocaleString();
+  const formattedDate = new Date(account.attributes.updated_at).toLocaleString('pt-Br');
   return (
     <>
       <div className="subtitle">Account Summary</div>
@@ -18,10 +18,10 @@ const AccountSummary = ({ account }) => {
         </thead>
         <tbody>
           <tr>
-            <td>{`$ ${(account.balance_cents / 100).toFixed(2)} `}</td>
-            <td>{`$ ${(account.balance_cents / 100).toFixed(2)} `}</td>
-            <td>{`$ ${(account.balance_cents / 100).toFixed(2)} `}</td>
-            <td>{`$ ${(account.balance_cents / 100).toFixed(2)} `}</td>
+            <td>{`$ ${(account.attributes.balance_cents / 100).toFixed(2)} `}</td>
+            <td>{`$ ${account.attributes.invested_cents ? (account.attributes.balance_cents / 100).toFixed(2) : '0'} `}</td>
+            <td>{`$ ${account.attributes.invested_cents ? (account.attributes.balance_cents / 100).toFixed(2) : '0'} `}</td>
+            <td>{`$ ${account.attributes.invested_cents ? (account.attributes.balance_cents / 100).toFixed(2) : '0'} `}</td>
             <td>{formattedDate}</td>
           </tr>
         </tbody>

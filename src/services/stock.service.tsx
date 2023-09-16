@@ -7,7 +7,7 @@ class StockService {
 
   getStockList(accountId: number) {
     return axios.get(API_URL + 'api/v1/investments/stocks',
-      { params: { account_id: accountId, }, headers: authHeader() });
+      { params: { stock: { account_id: accountId } }, headers: authHeader() });
   }
 
   getStock(stockId: number) {

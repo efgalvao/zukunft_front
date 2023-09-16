@@ -3,22 +3,6 @@ import '../Accounts/AccountSummary.css';
 import { Link } from 'react-router-dom';
 
 const StockList = ({ stocks }) => {
-  const formattedDate = (date) => {
-    const options = {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
-    };
-
-
-
-    const formattedDateString = date.toLocaleDateString('pt-BR', options);
-
-    return `${formattedDateString}`;
-  };
 
   const valuePerShare = (stock) => {
     return (stock.attributes.invested_value_cents / 100).toFixed(2) / stock.attributes.shares_total || 0
@@ -54,7 +38,6 @@ const StockList = ({ stocks }) => {
               <td>{`$ ${(stock.attributes.current_value_cents / 100).toFixed(2)}`}</td>
               <td>{stock.attributes.shares_total}</td>
             </tr>
-
           ))}
         </tbody>
       </table>

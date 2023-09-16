@@ -2,12 +2,16 @@ import React from 'react';
 import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 
 const PastTotalBalanceChart = ({ data }) => {
+  const newData = data.map(item => ({
+    TotalBalance: (item.attributes.total_balance_cents / 100).toFixed(2),
+    Date: item.attributes.date
+  }))
   return (
     <>
       <div className="subtitle">Past Total Balances</div>
 
       <ResponsiveContainer width="100%" height={400}>
-        <LineChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+        <LineChart data={newData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
           <Line name="Total Balance" type="monotone" dataKey="TotalBalance" stroke="#5120d8" strokeWidth={2} />
           <CartesianGrid stroke="#ccc" strokeDasharray="10 10" />
           <XAxis dataKey="Date" />

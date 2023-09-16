@@ -35,11 +35,11 @@ const PastReportsList = ({ reports }) => {
           {reports.map((report, index) => (
 
             <tr key={index}>
-              <td>{`$ ${report.Incomes.toFixed(2)}`}</td>
-              <td>{`$ ${report.Expenses.toFixed(2)}`}</td>
-              <td>{`$ ${report.Invested.toFixed(2)}`}</td>
-              <td>{`$ ${report.FinalBalance.toFixed(2)}`}</td>
-              <td>{formattedDate(new Date(report.Date))}</td>
+              <td>{`$ ${(report.attributes.incomes_cents / 100).toFixed(2)}`}</td>
+              <td>{`$ ${(report.attributes.expenses_cents / 100).toFixed(2)}`}</td>
+              <td>{`$ ${(report.attributes.invested_cents / 100).toFixed(2)}`}</td>
+              <td>{`$ ${(report.attributes.final_balance_cents / 100).toFixed(2)}`}</td>
+              <td>{formattedDate(new Date(report.attributes.date))}</td>
             </tr>
 
           ))}

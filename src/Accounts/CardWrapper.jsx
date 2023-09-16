@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { LinkButton } from '../Common/Buttons';
 
@@ -43,8 +42,13 @@ const Value = styled.span`
 `;
 
 function Card({ data }) {
-  const { id, name, kind, balance_cents, updated_at } = data;
+  const kind = data.attributes.kind;
+  const balance_cents = data.attributes.balance_cents;
+  const updated_at = data.attributes.updated_at;
+  const name = data.attributes.name;
+  const id = data.id;
   const formattedDate = new Date(updated_at).toLocaleString();
+  const formatedBalance = `$ ${(balance_cents / 100).toFixed(2)} `;
 
 
   return (
@@ -56,7 +60,7 @@ function Card({ data }) {
       </FieldWrapper>
       <FieldWrapper>
         <Label>Balance:</Label>
-        <Value>{`$ ${(balance_cents / 100).toFixed(2)} `}</Value>
+        <Value>{formatedBalance}</Value>
       </FieldWrapper>
       <FieldWrapper>
         <Label>Last update:</Label>
@@ -68,14 +72,5 @@ function Card({ data }) {
   );
 }
 
-Card.propTypes = {
-  data: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    kind: PropTypes.oneOf(['savings', 'broker', 'card']).isRequired,
-    balance_cents: PropTypes.number.isRequired,
-    updated_at: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default Card;
