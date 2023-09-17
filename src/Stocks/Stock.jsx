@@ -32,7 +32,7 @@ const Stock = () => {
   const [stock, setStock] = useState('');
 
   const valuePerShare = (stock) => {
-    return (stock.invested_value_cents / 100).toFixed(2) / stock.shares_total || 0
+    return (stock.attributes?.invested_value_cents / 100).toFixed(2) / stock.attributes?.shares_total || 0
   };
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Stock = () => {
   return (
     <div className="">
       <div className="subtitle">
-        <Title>{stock.ticker}</Title>
+        <Title>{stock.attributes?.ticker}</Title>
       </div>
       <div className="container py-3">
         <NewDividend stockId={params.stockId} />
@@ -61,7 +61,7 @@ const Stock = () => {
           <table className="summary-table">
             <thead>
               <tr>
-                <th>Valor investido:</th>
+                <th>Valor investido::</th>
                 <th>Valor investido por cota:</th>
                 <th>Valor total atual</th>
                 <th>Valor atual por cota:</th>
@@ -70,11 +70,11 @@ const Stock = () => {
             </thead>
             <tbody>
               <tr>
-                <td>{`$ ${(stock.invested_value_cents / 100).toFixed(2)} `}</td>
-                <td>$ {valuePerShare(stock)}</td>
-                <td>{`$ ${(stock.current_total_value_cents / 100).toFixed(2)} `}</td>
-                <td>{`$ ${(stock.current_value_cents / 100).toFixed(2)} `}</td>
-                <td>{stock.shares_total}</td>
+                <td>{`$ ${(stock.attributes?.invested_value_cents / 100).toFixed(2)} `}</td>
+                <td>$ {valuePerShare(stock).toFixed(2)}</td>
+                <td>{`$ ${(stock.attributes?.current_total_value_cents / 100).toFixed(2)} `}</td>
+                <td>{`$ ${(stock.attributes?.current_value_cents / 100).toFixed(2)} `}</td>
+                <td>{stock.attributes?.shares_total}</td>
               </tr>
             </tbody>
           </table >
