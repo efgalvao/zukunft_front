@@ -11,6 +11,7 @@ import DividendList from "./DividendList";
 import PriceList from "./PriceList";
 import NewDividend from "../Dividends/NewDividend";
 import NewPrice from "../Prices/NewPrice";
+import NewNegotiation from "../Negotiations/NewNegotiation";
 
 const Wrapper = styled.div`
   display: grid;
@@ -55,6 +56,7 @@ const Stock = () => {
       <div className="container py-3">
         <NewDividend stockId={params.stockId} />
         <NewPrice stockId={params.stockId} />
+        <NewNegotiation parentKind="stock" parentId={params.stockId} />
       </div>
       <div>
         <Wrapper>
