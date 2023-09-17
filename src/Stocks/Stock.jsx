@@ -89,6 +89,14 @@ const Stock = () => {
           </>
         )
         }
+
+        {stock.attributes?.prices.length > 0 && (
+          <>
+            <PriceList prices={stock.attributes.prices} />
+            <PriceChart prices={stock.attributes.prices} />
+          </>
+        )}
+
         {stock.attributes?.negotiations.length > 0 &&
           <NegotiationList negotiations={stock.attributes.negotiations} />
         }
