@@ -7,6 +7,8 @@ import { LinkButton } from '../Common/Buttons';
 import DividendChart from "../Dividends/DividendChart";
 import PriceChart from "../Prices/PriceChart";
 import NegotiationList from "./NegotiationList";
+import DividendList from "./DividendList";
+import PriceList from "./PriceList";
 import NewDividend from "../Dividends/NewDividend";
 import NewPrice from "../Prices/NewPrice";
 
@@ -78,8 +80,12 @@ const Stock = () => {
           </table >
 
         </Wrapper>
-        {stock.dividends && stock.dividends.length > 0 &&
-          <DividendChart dividends={stock.dividends} />
+        {stock.attributes?.dividends.length > 0 && (
+          <>
+            <DividendList dividends={stock.attributes.dividends} />
+            <DividendChart dividends={stock.attributes.dividends} />
+          </>
+        )
         }
         {stock.prices && stock.prices.length > 0 &&
           <PriceChart prices={stock.prices} />
