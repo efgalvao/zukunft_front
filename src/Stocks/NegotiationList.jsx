@@ -14,10 +14,6 @@ const NegotiationList = ({ negotiations }) => {
     return `${formattedDateString}`;
   };
 
-  const valuePerShare = (negotiation) => {
-    return negotiation.invested_value_cents / negotiation.shares_total || 0
-  };
-
   return (
     <>
       <div className="subtitle">Negociações</div>

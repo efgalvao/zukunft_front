@@ -89,11 +89,8 @@ const Stock = () => {
           </>
         )
         }
-        {stock.prices && stock.prices.length > 0 &&
-          <PriceChart prices={stock.prices} />
-        }
-        {stock.negotiations && stock.negotiations.length > 0 &&
-          <NegotiationList negotiations={stock.negotiations} />
+        {stock.attributes?.negotiations.length > 0 &&
+          <NegotiationList negotiations={stock.attributes.negotiations} />
         }
 
         <div className="container py-3">
