@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import TransactionService from "../services/transaction.service";
 import Statement from "./StatementWrapper";
 import { LinkButton } from "../Common/Buttons";
+import NewTransaction from "./NewTransaction";
 
 const TransactionList = () => {
   const navigate = useNavigate();
@@ -48,12 +49,12 @@ const TransactionList = () => {
       <div className="py-5">
         <main className="container">
           <div className="text-end mb-3">
-            <LinkButton linkTo={`/accounts/${accountId}/transaction`} buttonText="Create New Transaction" color="blue" />
+            <NewTransaction id={accountId} />
           </div>
           <div className="row">
             {transactions.length > 0 ? allTransactions : noTransaction}
           </div>
-          <LinkButton linkTo={`/account/${accountId}`} buttonText="Back to Account" color="blue" />
+          <LinkButton linkTo={`/account/${accountId}`} buttonText="Voltar" color="blue" />
         </main>
       </div>
     </>

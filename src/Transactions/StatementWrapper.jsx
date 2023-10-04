@@ -42,13 +42,13 @@ const StatementTableCell = styled.td`
 
 function Statement({ transactions }) {
   const statementRows = transactions.map((transaction, index) => (
-    <StatementTableRow key={index} isNegative={transaction.kind === 'expense'}>
-      <StatementTableCell>{transaction.title}</StatementTableCell>
-      <StatementTableCell>{transaction.value_cents / 100}</StatementTableCell>
-      <StatementTableCell>{transaction.kind}</StatementTableCell>
-      <StatementTableCell>{new Date(transaction.date).toLocaleDateString('pt-BR')}</StatementTableCell>
+    <StatementTableRow key={index} isNegative={transaction.attributes.kind === 'expense'}>
+      <StatementTableCell>{transaction.attributes.title}</StatementTableCell>
+      <StatementTableCell>{transaction.attributes.value_cents / 100}</StatementTableCell>
+      <StatementTableCell>{transaction.attributes.kind}</StatementTableCell>
+      <StatementTableCell>{new Date(transaction.attributes.date).toLocaleDateString('pt-BR')}</StatementTableCell>
       <StatementTableCell>
-        <Link to={`/update-transaction/${transaction.id}`} state={{ transaction }}>Update</Link>
+        <Link to={`/update-transaction/${transaction.id}`} state={{ transaction }}>Editar</Link>
       </StatementTableCell>
     </StatementTableRow >
   ));

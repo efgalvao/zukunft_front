@@ -181,7 +181,7 @@ const NewTransactionModal = ({ id }) => {
                   />
                 </div>
 
-                <CustomButton type="submit" buttonText="Criar cartão" color="green" />
+                <CustomButton type="submit" buttonText="Criar Transação" color="green" />
                 <FunctionButton linkTo={'/cards'} buttonText="Voltar" color="blue" onClick={handleCloseModal} />
               </form>
             </div>
