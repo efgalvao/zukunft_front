@@ -35,7 +35,7 @@ const NewCard = () => {
     const body = {
       'card': {
         'name': formValues.name,
-        'balance_cents': formValues.balance_cents,
+        'balance': formValues.balance_cents,
         'kind': 'card'
       }
     };
@@ -44,6 +44,7 @@ const NewCard = () => {
       console.log('body', body)
       if (response.status === 201) {
         setIsModalOpen(false);
+        handleAccountCreated()
       }
     },
       error => {
@@ -62,6 +63,9 @@ const NewCard = () => {
     setIsModalOpen(false);
   };
 
+  const handleAccountCreated = () => {
+    window.location.reload();
+  };
 
   return (
     <>

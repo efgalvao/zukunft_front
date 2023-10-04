@@ -2,26 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AccountService from "../services/account.service";
 import stockServiceInstance from "../services/stock.service";
-import styled from 'styled-components';
-import { LinkButton } from '../Common/Buttons';
-import { FunctionButton } from '../Common/Buttons';
+import './Account.css';
+import { LinkButton, FunctionButton } from '../Common/Buttons';
 
+import NewTransaction from "../Transactions/NewTransaction";
 import AccountSummary from "./AccountSummary";
 import AccountReport from "./AccountReport";
-import './Account.css';
 import PastTotalBalanceChart from "./PastTotalBalanceChart";
 import PastReportsList from "./PastReportsList";
 import PastReportsChart from "./PastReportsChart";
 import NewStock from "../Stocks/NewStock";
 import StockList from "../Stocks/StockList";
-
-const Title = styled.h1`
-  font-size: 3rem;
-  font-weight: bold;
-  color: #333;
-  text-align: center;
-  margin-bottom: 2rem;
-`;
 
 const Account = () => {
   const params = useParams();
@@ -43,7 +34,7 @@ const Account = () => {
   useEffect(() => {
     AccountService.getAccount(params.id).then((response) => {
       if (response.status === 200) {
-        setAccount(response.data)
+        setAccount(response.data.attributes)
         return response.data;
       }
     }, error => {
@@ -63,7 +54,6 @@ const Account = () => {
     AccountService.getAccountReports(accountReportsRequest).then((response) => {
       if (response.status === 200) {
         setReports(response.data)
-
         return response.data;
       }
     }, error => {
@@ -99,15 +89,14 @@ const Account = () => {
   return (
     <div className="">
       <div className='title'>
-        <Title>{account.name}</Title>
-        <div className="buttons">
-          <LinkButton linkTo={`/accounts/${account.id}/transactions`} buttonText="Transactions" color="green" />
-          <LinkButton linkTo={`/accounts/${account.id}/transaction`} buttonText="New Transaction" color="blue" />
-          {account.kind === "broker" &&
-            <NewStock accountId={account.id} accountName={account.name} />
-          }
-
-        </div>
+        {account.name}
+      </div>
+      <div className="buttons">
+        <LinkButton linkTo={`/accounts/${account.id}/transactions`} buttonText="Transações" color="green" />
+        <NewTransaction id={account.id} />
+        {account.kind === "broker" &&
+          <NewStock accountId={account.id} accountName={account.name} />
+        }
       </div>
 
       <AccountSummary account={account} />
@@ -120,9 +109,9 @@ const Account = () => {
       }
 
       <div className="container py-2">
-        <FunctionButton buttonText="Delete Account" color="red" onClick={handleDelete} type="button" />
+        <FunctionButton buttonText="Remover Conta" color="red" onClick={handleDelete} type="button" />
 
-        <LinkButton linkTo={'/accounts'} buttonText="Back to Accounts" color="blue" />
+        <LinkButton linkTo={'/accounts'} buttonText="Voltar" color="blue" />
       </div>
     </div >
   );

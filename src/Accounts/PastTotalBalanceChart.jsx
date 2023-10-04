@@ -8,11 +8,11 @@ const PastTotalBalanceChart = ({ data }) => {
   }))
   return (
     <>
-      <div className="subtitle">Past Total Balances</div>
+      <div className="subtitle">Balaço de meses anteriores:</div>
 
       <ResponsiveContainer width="100%" height={400}>
         <LineChart data={newData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-          <Line name="Total Balance" type="monotone" dataKey="TotalBalance" stroke="#5120d8" strokeWidth={2} />
+          <Line name="Balanço" type="monotone" dataKey="TotalBalance" stroke="#5120d8" strokeWidth={2} />
           <CartesianGrid stroke="#ccc" strokeDasharray="10 10" />
           <XAxis dataKey="Date" />
           <YAxis />
