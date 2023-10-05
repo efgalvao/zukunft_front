@@ -9,8 +9,8 @@ class TransactionService {
     return axios.get(API_URL + `api/v1/accounts/${accountId}/transactions`, { headers: authHeader() });
   }
 
-  getTransaction(accountId: number, id: number) {
-    return axios.get(API_URL + `api/v1/accounts/${accountId}/transactions/${id}`, { headers: authHeader() });
+  getTransaction(accountId: number, transactionId: number) {
+    return axios.get(API_URL + `api/v1/accounts/${accountId}/transactions/${transactionId}`, { headers: authHeader() });
   }
 
   createTransaction(body: any) {

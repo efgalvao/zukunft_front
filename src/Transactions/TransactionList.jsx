@@ -31,7 +31,7 @@ const TransactionList = () => {
   const noTransaction = (
     <div className="vw-100 vh-50 d-flex align-items-center justify-content-center">
       <h4>
-        No transactions yet. Why not <Link to="/transaction">create one</Link>
+        Não há transações cadastradas.
       </h4>
     </div>
   );
@@ -40,10 +40,8 @@ const TransactionList = () => {
     <>
       <section className="jumbotron jumbotron-fluid text-center">
         <div className="container py-1">
-          <h1 className="display-4">Transactions</h1>
-          <p className="lead text-muted">
-            Here are all your transactions for this account.
-          </p>
+          <h1 className="display-4">Transações</h1>
+
         </div>
       </section>
       <div className="py-5">

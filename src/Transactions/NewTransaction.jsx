@@ -83,6 +83,7 @@ const NewTransactionModal = ({ id }) => {
         navigate("/");
       });
   }, []);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {

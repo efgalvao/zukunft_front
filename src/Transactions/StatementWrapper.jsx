@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import UpdateTransaction from "./UpdateTransaction";
 
 
 const StatementWrapper = styled.div`
@@ -48,7 +49,7 @@ function Statement({ transactions }) {
       <StatementTableCell>{transaction.attributes.kind}</StatementTableCell>
       <StatementTableCell>{new Date(transaction.attributes.date).toLocaleDateString('pt-BR')}</StatementTableCell>
       <StatementTableCell>
-        <Link to={`/update-transaction/${transaction.id}`} state={{ transaction }}>Editar</Link>
+        <UpdateTransaction transaction={transaction.attributes} />
       </StatementTableCell>
     </StatementTableRow >
   ));
