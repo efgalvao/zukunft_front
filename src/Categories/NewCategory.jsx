@@ -1,7 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CategoryService from "../services/category.service";
-import { LinkButton, CustomButton } from '../Common/Buttons';
+import { CustomButton, FunctionButton } from "../Common/Buttons";
+import Modal from '../Common/Modal';
+
+import styled from 'styled-components';
+
+const Button = styled.button`
+  background-color: ${props => props.color || 'green'};
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin: 10px 10px 0 0;
+`;
 
 const NewCategory = () => {
   const navigate = useNavigate();
@@ -20,7 +33,8 @@ const NewCategory = () => {
     CategoryService.createCategory(body).then((response) => {
       if (response.status === 201) {
         console.log(response.data)
-        navigate(`/category/${response.data.id}`)
+        setIsModalOpen(false);
+        handleCategoryCreated();
       }
     },
       error => {
@@ -29,16 +43,36 @@ const NewCategory = () => {
     )
   };
 
+  const handleCategoryCreated = () => {
+    window.location.reload();
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
+    <>
+    <Button color="blue" onClick={handleOpenModal}>
+      Criar Categoria
+    </Button>
+    
+    <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
     <div className="container mt-5">
       <div className="row">
         <div className="col-sm-12 col-lg-6 offset-lg-3">
           <h1 className="font-weight-normal mb-5">
-            Add a new category.
+            Criar Categoria
           </h1>
           <form onSubmit={onSubmit}>
             <div className="form-group">
-              <label htmlFor="recipeName">Category name</label>
+              <label htmlFor="recipeName">Nome</label>
               <input
                 type="text"
                 name="name"
@@ -48,12 +82,14 @@ const NewCategory = () => {
                 onChange={(event) => onChange(event, setName)}
               />
             </div>
-            <CustomButton type="submit" buttonText="Create Category" color='green' />
-            <LinkButton linkTo="/categories" buttonText="Back to categories" color='blue' />
+            <CustomButton type="submit" buttonText="Crriar Categoria" color='green' />
+            <FunctionButton linkTo="/categories" buttonText="Voltar" color='blue' onClick={handleCloseModal} />
           </form>
         </div>
       </div>
     </div>
+    </Modal>
+    </>
   );
 };
 

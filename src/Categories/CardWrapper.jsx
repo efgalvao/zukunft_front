@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { LinkButton } from '../Common/Buttons';
 
 const CardWrapper = styled.div`
   display: flex;
@@ -24,12 +23,11 @@ const Title = styled.h2`
 `;
 
 function Card({ data }) {
-  const { id, name } = data;
+  const  name = data.attributes.name;
 
   return (
     <CardWrapper>
       <Title>{name}</Title>
-      <LinkButton linkTo={`/category/${id}`} color='blue' buttonText='Details' />
     </CardWrapper>
   );
 }

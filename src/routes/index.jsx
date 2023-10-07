@@ -10,7 +10,6 @@ import { NotFoundPage } from "../Pages/NotFoundPage";
 
 import CategoryList from "../Categories/CategoryList";
 import NewCategory from "../Categories/NewCategory";
-import Category from "../Categories/Category";
 
 import AccountList from "../Accounts/AccountList";
 import NewAccount from "../Accounts/NewAccount";
@@ -40,7 +39,6 @@ export default (
     <Route path="/about" element={<AboutPage />} />
     <Route path="/categories" element={<CategoryList />} />
     <Route path="/category" element={<NewCategory />} />
-    <Route path="/category/:id" element={<Category />} />
     <Route path="*" element={<NotFoundPage />} />
     <Route path="/accounts" element={<AccountList />} />
     <Route path="/account" element={<NewAccount />} />

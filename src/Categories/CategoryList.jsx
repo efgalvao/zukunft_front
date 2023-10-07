@@ -3,17 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import CategoryService from "../services/category.service";
 import Card from "./CardWrapper";
 import { LinkButton } from "../Common/Buttons";
+import NewCategory from "./NewCategory";
 
 const CategoryList = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    CategoryService.getCategoryList().then((res) => {
-      if (res.status === 200) {
-
-        setCategories(res.data)
-        return res.data;
+    CategoryService.getCategoryList().then((response) => {
+      if (response.status === 200) {
+        setCategories(response.data)
+        return response.data;
       }
     },
       error => {
@@ -30,7 +30,7 @@ const CategoryList = () => {
   const noCategory = (
     <div className="vw-100 vh-50 d-flex align-items-center justify-content-center">
       <h4>
-        No categories yet. Why not <Link to="/category">create one</Link>
+        Não há categorias cadastradas.
       </h4>
     </div>
   );
@@ -39,20 +39,18 @@ const CategoryList = () => {
     <>
       <section className="jumbotron jumbotron-fluid text-center">
         <div className="container py-1">
-          <h1 className="display-4">Categories for every occasion</h1>
-          <p className="lead text-muted">
-            We’ve pulled together our most popular categories, so there’s sure to be something
-            tempting for you to try.
-          </p>
+          <h1 className="display-4">Categorias</h1>
         </div>
       </section>
       <div className="py-5">
         <main className="container">
+          <div className="text-end mb-3">
+            <NewCategory />
+          </div>
           <div className="row">
             {categories.length > 0 ? allCategories : noCategory}
           </div>
-          <LinkButton linkTo="/" buttonText="Home" color="blue" />
-          <LinkButton linkTo="/category" buttonText="Create New Category" color="blue" />
+          <LinkButton linkTo="/" buttonText="Voltar" color="blue" />
         </main>
       </div>
     </>
