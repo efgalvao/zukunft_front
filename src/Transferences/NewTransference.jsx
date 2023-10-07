@@ -4,7 +4,21 @@ import transferenceServiceInstance from "../services/transferece.service";
 import accountService from "../services/account.service";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { CustomButton, LinkButton } from "../Common/Buttons";
+import { CustomButton, FunctionButton } from "../Common/Buttons";
+
+import Modal from '../Common/Modal';
+
+import styled from 'styled-components';
+
+const Button = styled.button`
+  background-color: ${props => props.color || 'green'};
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin: 10px 10px 0 0;
+`;
 
 const NewTransference = () => {
   const navigate = useNavigate();
@@ -19,7 +33,6 @@ const NewTransference = () => {
 
   useEffect(() => {
     accountService.getAccountList().then((response) => {
-      console.log(response);
       setAccounts(response.data);
     },
       error => {
@@ -51,7 +64,8 @@ const NewTransference = () => {
 
     transferenceServiceInstance.createTransference(body).then((response) => {
       if (response.status === 201) {
-        navigate("/transferences")
+        setIsModalOpen(false);
+        handleTransferenceCreated();
       }
     },
       error => {
@@ -60,76 +74,98 @@ const NewTransference = () => {
     )
   };
 
+  const handleTransferenceCreated = () => {
+    window.location.reload();
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-sm-12 col-lg-6 offset-lg-3">
-          <h1 className="font-weight-normal mb-5">
-            Add a new transference.
-          </h1>
-          <form onSubmit={onSubmit}>
-            <div className="form-group">
-              <label htmlFor="transactionValue">Transference Value</label>
-              <input
-                type="number"
-                name="value"
-                value={formValues.value}
-                className="form-control"
-                required
-                onChange={onChange}
-              />
-            </div>
+    <>
+      <Button color="blue" onClick={handleOpenModal}>
+        Criar transferência
+      </Button>
 
-            <div className="form-group">
-              <label htmlFor="sender">Sender Account</label>
-              <select
-                type="text"
-                name="sender"
-                value={formValues.sender}
-                className="form-control"
-                required
-                onChange={onChange}>
-                <option key={0} value='choose'>Choose Account</option>
-                {accounts.map((account) => (
-                  <option key={account.id} value={account.id}>{account.name}</option>
-                ))}
-              </select>
-            </div>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <div className="container mt-5">
+          <div className="row">
+            <div className="col-sm-12 col-lg-6 offset-lg-3">
+              <h1 className="font-weight-normal mb-5">
+                Criar transferência
+              </h1>
+              <form onSubmit={onSubmit}>
+                <div className="form-group">
+                  <label htmlFor="transactionValue">Valor</label>
+                  <input
+                    type="number"
+                    name="value"
+                    value={formValues.value}
+                    className="form-control"
+                    required
+                    onChange={onChange}
+                  />
+                </div>
 
-            <div className="form-group">
-              <label htmlFor="receiver">Receiver Account</label>
-              <select
-                type="text"
-                name="receiver"
-                value={formValues.receiver}
-                className="form-control"
-                required
-                onChange={onChange}>
-                <option key={0} value='choose'>Choose Account</option>
-                {accounts.map((account) => (
-                  <option key={account.id} value={account.id}>{account.name}</option>
-                ))}
-              </select>
-            </div>
+                <div className="form-group">
+                  <label htmlFor="sender">Remetente</label>
+                  <select
+                    type="text"
+                    name="sender"
+                    value={formValues.sender}
+                    className="form-control"
+                    required
+                    onChange={onChange}>
+                    <option key={0} value='choose'>Selecione</option>
+                    {accounts.map((account) => (
+                      <option key={account.attributes.id} value={account.attributes.id}>{account.attributes.name}</option>
+                    ))}
+                  </select>
+                </div>
 
-            <div className="form-group">
-              <label htmlFor="date">Date of transference</label>
-              <DatePicker
-                selected={selectedDate}
-                onChange={handleChange}
-                name="date"
-                className="form-control"
-                required
-                dateFormat="dd-MM-yyyy"
-              />
-            </div>
+                <div className="form-group">
+                  <label htmlFor="receiver">Desrtinatário</label>
+                  <select
+                    type="text"
+                    name="receiver"
+                    value={formValues.receiver}
+                    className="form-control"
+                    required
+                    onChange={onChange}>
+                    <option key={0} value='choose'>Selecione</option>
+                    {accounts.map((account) => (
+                      <option key={account.attributes.id} value={account.attributes.id}>{account.attributes.name}</option>
+                      ))}
+                  </select>
+                </div>
 
-            <CustomButton type="submit" buttonText="Create Transference" color="green" />
-            <LinkButton linkTo="/transferences" buttonText="Back to Transferences" color="blue" />
-          </form>
+                <div className="form-group">
+                  <label htmlFor="date">Data</label>
+                  <DatePicker
+                    selected={selectedDate}
+                    onChange={handleChange}
+                    name="date"
+                    className="form-control"
+                    required
+                    dateFormat="dd-MM-yyyy"
+                  />
+                </div>
+
+                <CustomButton type="submit" buttonText="Criar Transferência" color="green" />
+                <FunctionButton linkTo="/transferences" buttonText="Voltar" color="blue" onClick={handleCloseModal} />
+              </form>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </Modal>
+    </>
   );
 };
 
