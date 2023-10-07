@@ -95,11 +95,11 @@ const Card = () => {
     <div className="">
       <div className='title'>
         <Title>{card.attributes.name}</Title>
+      </div>
         <div className="buttons">
           <LinkButton linkTo={`/cards/${card.id}/transactions`} buttonText="Transações" color="blue" />
           <NewTransaction id={card.id} />
         </div>
-      </div>
 
       <div className="container py-1">
         <SubTitle>

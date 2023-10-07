@@ -33,25 +33,25 @@ function NavBar({ loggedIn, switchMenu }) {
           <Link to="/" onClick={switchMenu}>Home</Link>
         </li>
         <li>
-          <Link to="/accounts" onClick={switchMenu}>Accounts</Link>
+          <Link to="/accounts" onClick={switchMenu}>Contas</Link>
         </li>
         <li>
-          <Link to="/cards" onClick={switchMenu}>Cards</Link>
+          <Link to="/cards" onClick={switchMenu}>Cartões</Link>
         </li>
         <li>
-          <Link to="/categories" onClick={switchMenu}>Categories</Link>
+          <Link to="/transferences" onClick={switchMenu}>Transferências</Link>
         </li>
         <li>
-          <Link to="/shortcuts" onClick={switchMenu}>ShortCuts</Link>
+          <Link to="/shortcuts" onClick={switchMenu}>Atalhos</Link>
+        </li>
+        <li>
+          <Link to="/categories" onClick={switchMenu}>Categorias</Link>
+        </li>
+        <li>
+          <Link to="/about" onClick={switchMenu}>Sobre</Link>
         </li>
         <li>
           <Link to="/logout" onClick={switchMenu}>Logout</Link>
-        </li>
-        <li>
-          <Link to="/about" onClick={switchMenu}>About</Link>
-        </li>
-        <li>
-          <Link to="/transferences" onClick={switchMenu}>Transferences</Link>
         </li>
       </ul>
     );

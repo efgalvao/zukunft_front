@@ -21,7 +21,6 @@ const Button = styled.button`
 `;
 
 const NewTransactionModal = ({ id }) => {
-  console.log('id', id)
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     title: '',
@@ -32,7 +31,6 @@ const NewTransactionModal = ({ id }) => {
   });
 
   const [categories, setCategories] = useState([]);
-
 
   const [selectedDate, setSelectedDate] = useState(null);
 
@@ -93,7 +91,6 @@ const NewTransactionModal = ({ id }) => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-
 
   return (
     <>
