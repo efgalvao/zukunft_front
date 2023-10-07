@@ -41,10 +41,10 @@ const StatementTableCell = styled.td`
 function Statement({ transferences }) {
   const statementRows = transferences.map((transference, index) => (
     <StatementTableRow key={index}>
-      <StatementTableCell>{transference.sender}</StatementTableCell>
-      <StatementTableCell>{transference.receiver}</StatementTableCell>
-      <StatementTableCell>{`$ ${(transference.value_cents / 100).toFixed(2)} `}</StatementTableCell>
-      <StatementTableCell>{new Date(transference.date).toLocaleString()}</StatementTableCell>
+      <StatementTableCell>{transference.attributes.sender.name}</StatementTableCell>
+      <StatementTableCell>{transference.attributes.receiver.name}</StatementTableCell>
+      <StatementTableCell>{`$ ${(transference.attributes.value_cents / 100).toFixed(2)} `}</StatementTableCell>
+      <StatementTableCell>{new Date(transference.attributes.date).toLocaleString()}</StatementTableCell>
     </StatementTableRow >
   ));
 
