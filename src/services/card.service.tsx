@@ -20,6 +20,10 @@ class CardService {
   deleteCard(id: number) {
     return axios.delete(API_URL + `api/v1/cards/${id}`, { headers: authHeader() });
   }
+
+  invoicePayment(body: any) {
+    return axios.post(API_URL + 'api/v1/cards/invoice_payment', body, { headers: authHeader() });
+  }
 }
 
 const cardServiceInstance = new CardService();

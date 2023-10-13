@@ -20,9 +20,6 @@ class AccountService {
     return axios.delete(API_URL + `api/v1/accounts/${id}`, { headers: authHeader() });
   }
 
-  getCardList() {
-    return axios.get(API_URL + 'api/v1/cards', { headers: authHeader() });
-  }
 
   getBrokers() {
     return axios.get(API_URL + 'api/v1/brokers', { headers: authHeader() });

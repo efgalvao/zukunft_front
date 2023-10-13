@@ -4,6 +4,7 @@ import CardService from "../services/card.service";
 import CardWrapper from "./CardWrapper";
 import { LinkButton } from '../Common/Buttons';
 import NewCard from "./NewCard";
+import InvoicePayment from "./InvoicePayment";
 
 const CardList = () => {
   const navigate = useNavigate();
@@ -46,6 +47,7 @@ const CardList = () => {
         <main className="container">
           <div className="text-end mb-3">
             <NewCard />
+            <InvoicePayment />
           </div>
           <div className="row">
             {cards.length > 0 ? allCards : noCard}
