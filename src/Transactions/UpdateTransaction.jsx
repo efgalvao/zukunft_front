@@ -98,7 +98,7 @@ const UpdateTransaction = ({ transaction }) => {
           <div className="row">
             <div className="col-sm-12 col-lg-6 offset-lg-3">
               <h1 className="font-weight-normal mb-5">
-                Nova transação
+                Atualizar transação
               </h1>
               <form onSubmit={onSubmit}>
                 <div className="form-group">
@@ -120,7 +120,7 @@ const UpdateTransaction = ({ transaction }) => {
                     type="text"
                     name="category_id"
                     id="transactionCategory"
-                    value={formValues.category_id}
+                    value={formValues.category_id || ''}
                     className="form-control"
                     required
                     onChange={onChange}>

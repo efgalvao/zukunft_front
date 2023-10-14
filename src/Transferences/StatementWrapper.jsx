@@ -50,14 +50,14 @@ function Statement({ transferences }) {
 
   return (
     <StatementWrapper>
-      <StatementHeader>Transferences </StatementHeader>
+      <StatementHeader>Transferências </StatementHeader>
       <StatementTable>
         <thead>
           <StatementTableHeader>
-            <StatementTableHeaderCell>Sender</StatementTableHeaderCell>
-            <StatementTableHeaderCell>Receiver</StatementTableHeaderCell>
-            <StatementTableHeaderCell>Value</StatementTableHeaderCell>
-            <StatementTableHeaderCell>Date</StatementTableHeaderCell>
+            <StatementTableHeaderCell>Remetente</StatementTableHeaderCell>
+            <StatementTableHeaderCell>Destinatário</StatementTableHeaderCell>
+            <StatementTableHeaderCell>Valor</StatementTableHeaderCell>
+            <StatementTableHeaderCell>Data</StatementTableHeaderCell>
           </StatementTableHeader>
         </thead>
         <tbody>
