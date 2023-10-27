@@ -19,7 +19,7 @@ const StatementTable = styled.table`
 `;
 
 const StatementTableRow = styled.tr`
-  background-color: ${props => props.isNegative ? '#FFB2B2' : '#32CD32'};
+  background-color: #8ceb8c;
 `;
 
 const StatementTableHeader = styled.tr`
@@ -41,10 +41,10 @@ const StatementTableCell = styled.td`
 function Statement({ transferences }) {
   const statementRows = transferences.map((transference, index) => (
     <StatementTableRow key={index}>
-      <StatementTableCell>{transference.attributes.sender.name}</StatementTableCell>
-      <StatementTableCell>{transference.attributes.receiver.name}</StatementTableCell>
-      <StatementTableCell>{`$ ${(transference.attributes.value_cents / 100).toFixed(2)} `}</StatementTableCell>
-      <StatementTableCell>{new Date(transference.attributes.date).toLocaleString()}</StatementTableCell>
+      <StatementTableCell>{transference.sender_name}</StatementTableCell>
+      <StatementTableCell>{transference.receiver_name}</StatementTableCell>
+      <StatementTableCell>{`$ ${(transference.value_cents / 100).toFixed(2)} `}</StatementTableCell>
+      <StatementTableCell>{new Date(transference.date).toLocaleString()}</StatementTableCell>
     </StatementTableRow >
   ));
 
