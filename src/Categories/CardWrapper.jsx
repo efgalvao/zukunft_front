@@ -1,6 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import EditCategory from './EditCategory';
+import DeleteCategory from "./DeleteCategory";
 
 const CardWrapper = styled.div`
   display: flex;
@@ -13,7 +14,11 @@ const CardWrapper = styled.div`
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   padding: 10px;
   width: 250px;
-  height: 110px;
+  height: 150px;
+`;
+
+const ButtonWrapper = styled.div`
+  display: inline-block;
 `;
 
 const Title = styled.h2`
@@ -23,20 +28,17 @@ const Title = styled.h2`
 `;
 
 function Card({ data }) {
-  const  name = data.attributes.name;
+  const name = data.attributes.name;
 
   return (
     <CardWrapper>
       <Title>{name}</Title>
+      <ButtonWrapper>
+        <EditCategory data={data} />
+        <DeleteCategory id={parseInt(data.id)} />
+      </ButtonWrapper>
     </CardWrapper>
   );
 }
-
-Card.propTypes = {
-  data: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default Card;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CategoryService from "../services/category.service";
+import categoryServiceInstance from "../services/category.service";
 import { CustomButton, FunctionButton } from "../Common/Buttons";
 import Modal from '../Common/Modal';
 
@@ -30,7 +30,7 @@ const NewCategory = () => {
       return;
     const body = { 'category': { 'name': name } };
 
-    CategoryService.createCategory(body).then((response) => {
+    categoryServiceInstance.createCategory(body).then((response) => {
       if (response.status === 201) {
         console.log(response.data)
         setIsModalOpen(false);
@@ -59,36 +59,36 @@ const NewCategory = () => {
 
   return (
     <>
-    <Button color="blue" onClick={handleOpenModal}>
-      Criar Categoria
-    </Button>
-    
-    <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-sm-12 col-lg-6 offset-lg-3">
-          <h1 className="font-weight-normal mb-5">
-            Criar Categoria
-          </h1>
-          <form onSubmit={onSubmit}>
-            <div className="form-group">
-              <label htmlFor="recipeName">Nome</label>
-              <input
-                type="text"
-                name="name"
-                id="categoryName"
-                className="form-control"
-                required
-                onChange={(event) => onChange(event, setName)}
-              />
+      <Button color="blue" onClick={handleOpenModal}>
+        Criar Categoria
+      </Button>
+
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <div className="container mt-5">
+          <div className="row">
+            <div className="col-sm-12 col-lg-6 offset-lg-3">
+              <h1 className="font-weight-normal mb-5">
+                Criar Categoria
+              </h1>
+              <form onSubmit={onSubmit}>
+                <div className="form-group">
+                  <label htmlFor="recipeName">Nome</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="categoryName"
+                    className="form-control"
+                    required
+                    onChange={(event) => onChange(event, setName)}
+                  />
+                </div>
+                <CustomButton type="submit" buttonText="Criar Categoria" color='green' />
+                <FunctionButton linkTo="/categories" buttonText="Voltar" color='blue' onClick={handleCloseModal} />
+              </form>
             </div>
-            <CustomButton type="submit" buttonText="Crriar Categoria" color='green' />
-            <FunctionButton linkTo="/categories" buttonText="Voltar" color='blue' onClick={handleCloseModal} />
-          </form>
+          </div>
         </div>
-      </div>
-    </div>
-    </Modal>
+      </Modal>
     </>
   );
 };
