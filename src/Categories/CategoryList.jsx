@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import CategoryService from "../services/category.service";
+import categoryServiceInstance from "../services/category.service";
 import Card from "./CardWrapper";
 import { LinkButton } from "../Common/Buttons";
 import NewCategory from "./NewCategory";
@@ -10,7 +10,7 @@ const CategoryList = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    CategoryService.getCategoryList().then((response) => {
+    categoryServiceInstance.getCategoryList().then((response) => {
       if (response.status === 200) {
         setCategories(response.data)
         return response.data;
@@ -23,7 +23,7 @@ const CategoryList = () => {
   }, []);
 
   const allCategories = categories.map((category, index) => (
-    <div key={index} className="col-md-6 col-lg-4">
+    <div key={index} className="col-lg-3">
       <Card data={category} />
     </div>
   ));

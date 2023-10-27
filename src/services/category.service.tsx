@@ -16,6 +16,10 @@ class CategoryService {
     return axios.post(API_URL + 'api/v1/categories', body, { headers: authHeader() });
   }
 
+  updateCategory(body: any, id: number) {
+    return axios.put(API_URL + `api/v1/categories/${id}`, body, { headers: authHeader() });
+  }
+
   deleteCategory(id: number) {
     return axios.delete(API_URL + `api/v1/categories/${id}`, { headers: authHeader() });
   }
