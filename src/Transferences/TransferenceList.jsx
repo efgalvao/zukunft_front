@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import transferenceServiceInstance from "../services/transferece.service";
 import Statement from "./StatementWrapper";
 import { LinkButton } from "../Common/Buttons";
@@ -7,12 +7,14 @@ import NewTransference from "./NewTransference";
 
 const TransferenceList = () => {
   const navigate = useNavigate();
-  const [transferences, setTransferences] = useState([]);
+  const [pastTransferences, setPastTransferences] = useState([]);
+  const [futureTransferences, setFutureTransferences] = useState([]);
 
   useEffect(() => {
     transferenceServiceInstance.getTransferenceList().then((response) => {
       if (response.status === 200) {
-        setTransferences(response.data)
+        setPastTransferences(response.data.past_transferences);
+        setFutureTransferences(response.data.future_transferences);
         return response.data;
       }
     },
@@ -22,15 +24,20 @@ const TransferenceList = () => {
       });
   }, [navigate]);
 
-  const allTransferences = (
+  const pastTransferencesTab = (
     <div>
-      <Statement transferences={transferences} />
+      <Statement transferences={pastTransferences} />
+    </div>
+  );
+  const futureTransferencesTab = (
+    <div>
+      <Statement transferences={futureTransferences} />
     </div>
   );
   const noTransference = (
-    <div className="vw-100 vh-50 d-flex align-items-center justify-content-center">
+    <div className="vh-50 d-flex align-items-center justify-content-center">
       <h4>
-        Ainda nào há transferências cadastradas.
+        Não há transferências cadastradas.
       </h4>
     </div>
   );
@@ -45,11 +52,25 @@ const TransferenceList = () => {
       <div className="py-5">
         <main className="container">
           <div className="text-end mb-3">
-          <NewTransference />
-            </div>
-          <div className="row">
-            {transferences.length > 0 ? allTransferences : noTransference}
+            <NewTransference />
           </div>
+          <div className="row">
+            <div className="col-12">
+              <nav>
+                <div className="nav nav-tabs" id="nav-tab" role="tablist">
+                  <button className="nav-link active" id="nav-past-tab" data-bs-toggle="tab" data-bs-target="#nav-past" type="button" role="tab" aria-controls="nav-past" aria-selected="true">Transferências</button>
+                  <button className="nav-link" id="nav-future-tab" data-bs-toggle="tab" data-bs-target="#nav-future" type="button" role="tab" aria-controls="nav-future" aria-selected="false">Transferências agendadas</button>
+                </div>
+              </nav>
+              <div className="tab-content" id="nav-tabContent">
+                <div className="tab-pane fade show active" id="nav-past" role="tabpanel" aria-labelledby="nav-past-tab">
+                  {pastTransferences.length > 0 ? pastTransferencesTab : noTransference}
+                </div>
+                <div className="tab-pane fade" id="nav-future" role="tabpanel" aria-labelledby="nav-future-tab">
+                  {futureTransferences.length > 0 ? futureTransferencesTab : noTransference}
+                </div>
+              </div>
+            </div>          </div>
           <LinkButton linkTo={`/`} buttonText="Voltar" color="blue" />
         </main>
       </div>
