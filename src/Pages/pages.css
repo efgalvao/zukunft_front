@@ -4,3 +4,10 @@
   box-sizing: border-box;
   border-radius: 25px;
 }
+
+.logout {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+  padding: 10px 20px;
+}
