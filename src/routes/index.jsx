@@ -30,6 +30,10 @@ import NewTransference from "../Transferences/NewTransference";
 import NewStock from "../Stocks/NewStock";
 import Stock from "../Stocks/Stock";
 
+import InvestmentList from "../Investments/InvestmentList";
+
+import Treasury from "../Treasuries/Treasury";
+
 export default (
   <Routes>
     <Route path="/" element={<HomePage />} />
@@ -54,6 +58,8 @@ export default (
     <Route path="/transferences" element={<TransferenceList />} />
     <Route path="/transference" element={<NewTransference />} />
     <Route path="/accounts/:accountId/stock" element={<NewStock />} />
+    <Route path="/investments" element={<InvestmentList />} />
     <Route path="/stock/:stockId" element={<Stock />} />
+    <Route path="/treasury/:treasuryId" element={<Treasury />} />
   </Routes>
 );
