@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AccountService from "../services/account.service";
 import stockServiceInstance from "../services/stock.service";
+import treasuryServiceInstance from "../services/treasury.service";
 import './Account.css';
 import { LinkButton, FunctionButton } from '../Common/Buttons';
 
@@ -13,6 +14,7 @@ import PastReportsList from "./PastReportsList";
 import PastReportsChart from "./PastReportsChart";
 import NewStock from "../Stocks/NewStock";
 import StockList from "../Stocks/StockList";
+import TreasuryList from "../Treasuries/TreasuryList";
 
 const Account = () => {
   const params = useParams();
@@ -21,6 +23,7 @@ const Account = () => {
   const [report, setReport] = useState('');
   const [reports, setReports] = useState([]);
   const [stocks, setStocks] = useState([]);
+  const [treasuries, setTreasuries] = useState([]);
 
   const currentDate = new Date();
   const sixMonthAgo = new Date(currentDate.getFullYear(), currentDate.getMonth() - 6, currentDate.getDate());
@@ -71,6 +74,17 @@ const Account = () => {
       setStocks({ updated_at: "0", balance: 0, income: 0, expense: 0 })
       navigate("/accounts");
     });
+    treasuryServiceInstance.getTreasuryList(params.id).then((response) => {
+      if (response.status === 200) {
+        console.log(response.data)
+        setTreasuries(response.data)
+        return response.data;
+      }
+    }, error => {
+      console.log("Network response was not ok." + error)
+      setStocks({ updated_at: "0", balance: 0, income: 0, expense: 0 })
+      navigate("/accounts");
+    });
   }, [params.id]
   );
 
@@ -106,6 +120,9 @@ const Account = () => {
       <PastReportsChart data={reports} />
       {stocks && stocks.length > 0 &&
         <StockList stocks={stocks} />
+      }
+      {treasuries && treasuries.length > 0 &&
+        <TreasuryList treasuries={treasuries} />
       }
 
       <div className="container py-2">
