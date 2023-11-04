@@ -13,6 +13,7 @@ import PastTotalBalanceChart from "./PastTotalBalanceChart";
 import PastReportsList from "./PastReportsList";
 import PastReportsChart from "./PastReportsChart";
 import NewStock from "../Stocks/NewStock";
+import NewTreasury from "../Treasuries/NewTreasury";
 import StockList from "../Stocks/StockList";
 import TreasuryList from "../Treasuries/TreasuryList";
 
@@ -110,6 +111,9 @@ const Account = () => {
         <NewTransaction id={account.id} />
         {account.kind === "broker" &&
           <NewStock accountId={account.id} accountName={account.name} />
+        }
+        {account.kind === "broker" &&
+          <NewTreasury accountId={account.id} accountName={account.name} />
         }
       </div>
 
