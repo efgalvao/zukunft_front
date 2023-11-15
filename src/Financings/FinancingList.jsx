@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import financingServiceInstance from '../services/financing.service';
 import Statement from "./StatementWrapper";
 import { LinkButton } from '../Common/Buttons';
+import NewFinancing from './NewFinancing';
 
 function FinancingList() {
   const [financings, setFinancings] = useState([]);
@@ -37,6 +38,9 @@ function FinancingList() {
       </section>
       <div className="py-5">
         <main className="container">
+          <div className="text-end mb-3">
+            <NewFinancing />
+          </div>
           <div className="mb-3">
           </div>
           <div className="row">
