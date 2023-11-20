@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import financingServiceInstance from '../services/financing.service';
-import Statement from "./StatementWrapper";
+import Cards from "./FinancingCardWrapper";
 import { LinkButton } from '../Common/Buttons';
 import NewFinancing from './NewFinancing';
 
@@ -16,15 +16,13 @@ function FinancingList() {
   }, []);
 
   const allFinancings = (
-    <div>
-      <Statement financings={financings} />
-    </div>
+    <Cards financings={financings} />
   );
 
   const noFinancing = (
     <div className="vw-100 vh-50 d-flex align-items-center justify-content-center">
       <h4>
-        Nenhum investimento encontrado.
+        Nenhum financiamento encontrado.
       </h4>
     </div>
   );
