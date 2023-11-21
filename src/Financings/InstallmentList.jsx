@@ -3,9 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import installmentServiceInstance from "../services/installment.service";
 import { LinkButton } from "../Common/Buttons";
 import InstallmentsWrapper from "./InstallmentsWrapper";
+import NewInstallment from "./NewInstallment";
 
 const InstallmentList = () => {
-  console.log("InstallmentList")
   const navigate = useNavigate();
   const [installments, setInstallments] = useState([]);
   const { financingId } = useParams();
@@ -46,6 +46,9 @@ const InstallmentList = () => {
         </div>
       </section>
       <div className="py-5">
+        <div className="buttons">
+          <NewInstallment financingId={financingId} />
+        </div>
         <main className="container">
           <div className="text-end mb-3">
           </div>

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import financingServiceInstance from "../services/financing.service";
 import { LinkButton, FunctionButton } from '../Common/Buttons';
 import FinancingSummary from "./FinancingSummary";
+import NewInstallment from "./NewInstallment";
 
 const Financing = () => {
   console.log("Financing")
@@ -43,6 +44,7 @@ const Financing = () => {
       </div>
       <div className="buttons">
         <LinkButton linkTo={`/financings/${financingId}/installments`} buttonText="Pagamentos" color="green" />
+        <NewInstallment financingId={financing.id} />
       </div>
       <div className="container py-2">
         <FinancingSummary financing={financing} />
