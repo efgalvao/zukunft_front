@@ -6,7 +6,6 @@ import FinancingSummary from "./FinancingSummary";
 import NewInstallment from "./NewInstallment";
 
 const Financing = () => {
-  console.log("Financing")
   const { financingId } = useParams();
 
   const navigate = useNavigate();

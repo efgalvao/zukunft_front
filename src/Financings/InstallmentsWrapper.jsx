@@ -38,8 +38,6 @@ const StatementTableCell = styled.td`
 `;
 
 function InstallmentsWrapper({ installments }) {
-  console.log("InstallmentsWrapper")
-  console.log(installments)
   const formatCurrency = (valueInCents) => {
     const valueInBRL = valueInCents / 100;
     return valueInBRL.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
