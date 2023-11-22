@@ -43,7 +43,7 @@ const NewCard = () => {
     cardServiceInstance.createCard(body).then((response) => {
       if (response.status === 201) {
         setIsModalOpen(false);
-        handleAccountCreated()
+        handleCardCreated()
       }
     },
       error => {
@@ -62,7 +62,7 @@ const NewCard = () => {
     setIsModalOpen(false);
   };
 
-  const handleAccountCreated = () => {
+  const handleCardCreated = () => {
     window.location.reload();
   };
 
@@ -73,10 +73,10 @@ const NewCard = () => {
       </Button>
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        <div className="container mt-5">
+        <div className="container mt-3">
           <div className="row">
             <div className="col-sm-12 col-lg-6 offset-lg-3">
-              <h1 className="font-weight-normal mb-5">
+              <h1 className="font-weight-normal mb-3">
                 Nova transação
               </h1>
               <form onSubmit={onSubmit}>

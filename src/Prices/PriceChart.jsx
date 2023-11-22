@@ -22,7 +22,7 @@ const PriceChart = ({ prices = [] }) => {
 
   return (
     <>
-      <div className="subtitle">Histórico de preços</div>
+      <div className="subtitle">Histórico de preços:</div>
 
       <ResponsiveContainer width="100%" height={400}>
         <LineChart data={formatedprices} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>

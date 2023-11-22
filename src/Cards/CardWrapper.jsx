@@ -65,14 +65,4 @@ function Card({ data }) {
   );
 }
 
-Card.propTypes = {
-  data: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    kind: PropTypes.oneOf(['savings', 'broker', 'card']).isRequired,
-    balance_cents: PropTypes.number.isRequired,
-    updated_at: PropTypes.string.isRequired,
-  }).isRequired,
-};
-
 export default Card;

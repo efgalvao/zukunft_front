@@ -45,6 +45,7 @@ const NewStock = ({ accountId, accountName }) => {
     stockServiceInstance.createStock(body).then((response) => {
       if (response.status === 201) {
         navigate(`/account/${accountId}`)
+        handleStockCreated()
       }
     },
       error => {
@@ -63,6 +64,10 @@ const NewStock = ({ accountId, accountName }) => {
     setIsModalOpen(false);
   };
 
+  const handleStockCreated = () => {
+    window.location.reload();
+  }
+
 
   return (
     <>
@@ -71,7 +76,7 @@ const NewStock = ({ accountId, accountName }) => {
       </Button>
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        <div className="container mt-5">
+        <div className="container mt-3">
           <div className="col-sm-12 col-lg-6 offset-lg-3">
             <h1 className="font-weight-normal mb-2">
               Registrar nova ação.

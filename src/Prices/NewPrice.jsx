@@ -20,7 +20,7 @@ const Button = styled.button`
 `;
 
 
-const NewPrice = ({ stockId }) => {
+const NewPrice = ({ parentId, parentKind }) => {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     valueCents: '',
@@ -43,17 +43,18 @@ const NewPrice = ({ stockId }) => {
     event.preventDefault();
 
     const body = {
-      'prices': {
-        'parent_kind': 'stock',
-        'parent_id': stockId,
+      'price': {
+        'parent_kind': parentKind,
+        'parent_id': parentId,
         'date': formValues.date,
-        'value_cents': formValues.valueCents
+        'value': formValues.valueCents
       }
     };
 
     priceServiceInstance.createPrice(body).then((response) => {
       if (response.status === 201) {
         setIsModalOpen(false);
+        handlePriceCreated()
       }
     },
       error => {
@@ -72,6 +73,9 @@ const NewPrice = ({ stockId }) => {
     setIsModalOpen(false);
   };
 
+  const handlePriceCreated = () => {
+    window.location.reload();
+  };
 
   return (
     <>
@@ -80,10 +84,10 @@ const NewPrice = ({ stockId }) => {
       </Button>
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        <div className="container mt-5">
+        <div className="container mt-3">
           <div className="row">
             <div className="col-sm-12 col-lg-6 offset-lg-3">
-              <h1 className="font-weight-normal mb-5">
+              <h1 className="font-weight-normal mb-3">
                 Novo preço
               </h1>
               <form onSubmit={onSubmit}>
@@ -113,7 +117,7 @@ const NewPrice = ({ stockId }) => {
                 </div>
 
                 <CustomButton type="submit" buttonText="Registrar preço" color="green" />
-                <FunctionButton linkTo={`/stock/${stockId}}`} buttonText="Voltar" color="blue" onClick={handleCloseModal} />
+                <FunctionButton linkTo={`/${parentKind}/${parentId}}`} buttonText="Voltar" color="blue" onClick={handleCloseModal} />
               </form>
             </div>
           </div>

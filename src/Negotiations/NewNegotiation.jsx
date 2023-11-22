@@ -58,6 +58,7 @@ const NewNegotiation = ({ parentKind, parentId }) => {
     negotiationServiceInstance.createNegotiation(body).then((response) => {
       if (response.status === 201) {
         setIsModalOpen(false);
+        handleNegotiationCreated()
       }
     },
       error => {
@@ -76,6 +77,10 @@ const NewNegotiation = ({ parentKind, parentId }) => {
     setIsModalOpen(false);
   };
 
+  const handleNegotiationCreated = () => {
+    window.location.reload();
+  }
+
 
   return (
     <>
@@ -84,10 +89,10 @@ const NewNegotiation = ({ parentKind, parentId }) => {
       </Button>
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        <div className="container mt-5">
+        <div className="container mt-3">
           <div className="row">
             <div className="col-sm-12 col-lg-6 offset-lg-3">
-              <h1 className="font-weight-normal mb-5">
+              <h1 className="font-weight-normal mb-3">
                 Novo Negociação
               </h1>
               <form onSubmit={onSubmit}>

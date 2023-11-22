@@ -55,7 +55,7 @@ const Stock = () => {
       </div>
       <div className="container py-3">
         <NewDividend stockId={params.stockId} />
-        <NewPrice stockId={params.stockId} />
+        <NewPrice parentId={params.stockId} parentKind={"stock"} />
         <NewNegotiation parentKind="stock" parentId={params.stockId} />
       </div>
       <div>

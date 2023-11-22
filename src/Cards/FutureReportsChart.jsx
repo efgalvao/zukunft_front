@@ -14,7 +14,7 @@ const PastReportsChart = ({ data }) => {
 
   return (
     <>
-      <div className="subtitle">Relatorio de meses anteriores</div>
+      <div className="subtitle">Relatorio de meses futuros</div>
 
       <ResponsiveContainer width="100%" height={400}>
         <LineChart data={newData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>

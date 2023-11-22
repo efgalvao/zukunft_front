@@ -17,28 +17,32 @@ const StatementHeader = styled.h2`
 `;
 
 const StatementTable = styled.table`
+  font-family: 'Open Sans', sans-serif;
+  background-color: #7293ec;
   border-collapse: collapse;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
   width: 80%;
 `;
 
 const StatementTableRow = styled.tr`
-  background-color: ${props => props.isNegative ? '#FFB2B2' : '#32CD32'};
-`;
+  background-color: ${props => props.isNegative ? '#e75454' : '#32CD32'};
+  &:hover {
+    background-color: #ddd;
+  }
+  `;
 
 const StatementTableHeader = styled.tr`
-  background-color: '#ddd';
+  background-color: '#2b2929';
 `;
 
 const StatementTableHeaderCell = styled.th`
-  border: 1px solid #ddd;
   text-align: left;
   padding: 8px;
 `;
 
 const StatementTableCell = styled.td`
-  border: 1px solid #ddd;
   text-align: left;
-  padding: 8px;
 `;
 
 function Statement({ transactions }) {

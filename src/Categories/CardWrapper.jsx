@@ -15,6 +15,7 @@ const CardWrapper = styled.div`
   padding: 10px;
   width: 250px;
   height: 150px;
+  margin: 10px;
 `;
 
 const ButtonWrapper = styled.div`
