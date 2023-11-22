@@ -58,37 +58,37 @@ const EditCategory = (data) => {
 
   return (
     <>
-    <Button color="blue" onClick={handleOpenModal}>
-      Renomear
-    </Button>
-    
-    <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-sm-12 col-lg-6 offset-lg-3">
-          <h1 className="font-weight-normal mb-5">
-          Renomear
-          </h1>
-          <form onSubmit={onSubmit}>
-            <div className="form-group">
-              <label htmlFor="recipeName">Nome</label>
-              <input
-                type="text"
-                name="name"
-                id="categoryName"
-                value={name}
-                className="form-control"
-                required
-                onChange={(event) => onChange(event, setName)}
-              />
+      <Button color="blue" onClick={handleOpenModal}>
+        Renomear
+      </Button>
+
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <div className="container mt-3">
+          <div className="row">
+            <div className="col-sm-12 col-lg-6 offset-lg-3">
+              <h1 className="font-weight-normal mb-3">
+                Renomear
+              </h1>
+              <form onSubmit={onSubmit}>
+                <div className="form-group">
+                  <label htmlFor="recipeName">Nome</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="categoryName"
+                    value={name}
+                    className="form-control"
+                    required
+                    onChange={(event) => onChange(event, setName)}
+                  />
+                </div>
+                <CustomButton type="submit" buttonText="Renomear" color='green' />
+                <FunctionButton linkTo="/categories" buttonText="Voltar" color='blue' onClick={handleCloseModal} />
+              </form>
             </div>
-            <CustomButton type="submit" buttonText="Renomear" color='green' />
-            <FunctionButton linkTo="/categories" buttonText="Voltar" color='blue' onClick={handleCloseModal} />
-          </form>
+          </div>
         </div>
-      </div>
-    </div>
-    </Modal>
+      </Modal>
     </>
   );
 };
