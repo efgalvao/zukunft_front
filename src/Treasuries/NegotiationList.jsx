@@ -2,7 +2,6 @@ import React from 'react';
 import '../Accounts/AccountSummary.css';
 
 const NegotiationList = ({ negotiations }) => {
-  console.log(negotiations);
   const formattedDate = (date) => {
     const options = {
       day: '2-digit',

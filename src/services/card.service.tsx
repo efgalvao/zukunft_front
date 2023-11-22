@@ -9,7 +9,6 @@ class CardService {
   }
 
   createCard(body: any) {
-    console.log(body)
     return axios.post(API_URL + 'api/v1/cards', body, { headers: authHeader() });
   }
 

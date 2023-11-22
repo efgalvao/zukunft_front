@@ -32,7 +32,6 @@ const NewCategory = () => {
 
     categoryServiceInstance.createCategory(body).then((response) => {
       if (response.status === 201) {
-        console.log(response.data)
         setIsModalOpen(false);
         handleCategoryCreated();
       }

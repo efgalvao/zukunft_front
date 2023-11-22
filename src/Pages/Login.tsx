@@ -17,7 +17,6 @@ export function Login() {
     event.preventDefault();
     AuthService.login(formData.email, formData.password).then(
       (result) => {
-        console.log(result);
         navigate('/accounts');
         window.location.reload();
 

@@ -3,7 +3,6 @@ import '../Accounts/AccountSummary.css';
 import { Link } from 'react-router-dom';
 
 const StockList = ({ stocks }) => {
-
   const valuePerShare = (stock) => {
     return (stock.attributes.invested_value_cents / 100).toFixed(2) / stock.attributes.shares_total || 0
   };

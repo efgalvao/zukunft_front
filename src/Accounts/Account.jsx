@@ -77,7 +77,6 @@ const Account = () => {
     });
     treasuryServiceInstance.getTreasuryList(params.id).then((response) => {
       if (response.status === 200) {
-        console.log(response.data)
         setTreasuries(response.data)
         return response.data;
       }

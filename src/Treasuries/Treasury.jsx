@@ -37,7 +37,6 @@ const Treasury = () => {
   useEffect(() => {
     treasuryServiceInstance.getTreasury(params.treasuryId).then((response) => {
       if (response.status === 200) {
-        // console.log(response.data)
         setTreasury(response.data)
         return response.data;
       }

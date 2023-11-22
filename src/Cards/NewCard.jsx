@@ -41,7 +41,6 @@ const NewCard = () => {
     };
 
     cardServiceInstance.createCard(body).then((response) => {
-      console.log('body', body)
       if (response.status === 201) {
         setIsModalOpen(false);
         handleAccountCreated()
