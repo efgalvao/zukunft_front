@@ -39,14 +39,16 @@ function NavBar({ loggedIn, switchMenu }) {
           <Link to="/cards" onClick={switchMenu}>Cartões</Link>
         </li>
         <li>
+          <Link to="/categories" onClick={switchMenu}>Categorias</Link>
+        </li>
+        <li>
           <Link to="/transferences" onClick={switchMenu}>Transferências</Link>
         </li>
         <li>
           <Link to="/investments" onClick={switchMenu}>Investimentos</Link>
         </li>
         <li>
-          <Link to="/categories" onClick={switchMenu}>Categorias</Link>
-        </li>
+          <Link to="/financings" onClick={switchMenu}>Financiamentos</Link></li>
         <li>
           <Link to="/about" onClick={switchMenu}>Sobre</Link>
         </li>

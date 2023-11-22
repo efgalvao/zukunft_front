@@ -34,6 +34,10 @@ import InvestmentList from "../Investments/InvestmentList";
 
 import Treasury from "../Treasuries/Treasury";
 
+import FinancingList from "../Financings/FinancingList";
+import Financing from "../Financings/Financing";
+import InstallmentList from "../Financings/InstallmentList";
+
 export default (
   <Routes>
     <Route path="/" element={<HomePage />} />
@@ -61,5 +65,8 @@ export default (
     <Route path="/investments" element={<InvestmentList />} />
     <Route path="/stock/:stockId" element={<Stock />} />
     <Route path="/treasury/:treasuryId" element={<Treasury />} />
+    <Route path="/financings" element={<FinancingList />} />
+    <Route path="/financings/:financingId" element={<Financing />} />
+    <Route path="/financings/:financingId/installments" element={<InstallmentList />} />
   </Routes>
 );
