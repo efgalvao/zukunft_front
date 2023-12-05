@@ -19,9 +19,9 @@ const AccountSummary = ({ account }) => {
         <tbody>
           <tr>
             <td>{`$ ${(account?.balance_cents / 100).toFixed(2)} `}</td>
-            <td>{`$ ${account?.invested_cents ? (account.attributes.balance_cents / 100).toFixed(2) : '0'} `}</td>
-            <td>{`$ ${account?.invested_cents ? (account.attributes.balance_cents / 100).toFixed(2) : '0'} `}</td>
-            <td>{`$ ${account?.invested_cents ? (account.attributes.balance_cents / 100).toFixed(2) : '0'} `}</td>
+            <td>{`$ ${(account?.balance_plus_invested_cents / 100).toFixed(2)} `}</td>
+            <td>{`$ ${(account.invested_cents / 100).toFixed(2)} `}</td>
+            <td>{`$ ${(account.current_invested_cents / 100).toFixed(2)} `}</td>
             <td>{formattedDate}</td>
           </tr>
         </tbody>
